@@ -1,27 +1,18 @@
-import { Injectable, ComponentFactoryResolver, Type, Injector, ApplicationRef, EmbeddedViewRef } from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 import { Modal } from './modal';
+import { ComponentFactoryService } from './component-factory.service';
 
 @Injectable()
 export class ModalService {
-  constructor(private cfr: ComponentFactoryResolver, private defaultInjector: Injector) {
+  constructor(private componentFactory: ComponentFactoryService) {
   }
 
   open<T extends Modal>(componentType: Type<T>): T {
-    let componentFactory = this.cfr.resolveComponentFactory(componentType);
-
-    let componentRef = componentFactory.create(this.defaultInjector);
-
-    let appRef = this.defaultInjector.get(ApplicationRef);
-    appRef.attachView(componentRef.hostView);
-
-    let componentElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-
-    document.body.appendChild(componentElement);
+    let componentRef = this.componentFactory.createComponent(componentType);
 
     componentRef.instance.open();
 
     componentRef.instance.closed.subscribe(() => {
-      appRef.detachView(componentRef.hostView);
       componentRef.destroy();
     });
 

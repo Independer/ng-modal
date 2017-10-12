@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ModalTransclusionsDirective } from './modal-transclusions.directive';
 import { ModalComponent } from './modal.component';
 import { ModalService } from './modal.service';
+import { ComponentFactoryService } from './component-factory.service';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { ModalService } from './modal.service';
     ModalTransclusionsDirective
   ],
   providers: [
+    ComponentFactoryService,
     ModalService
   ],
   exports: [
