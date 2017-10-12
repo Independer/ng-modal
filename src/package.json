@@ -1,0 +1,28 @@
+{
+  "name": "ind-modal",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Independer/ind-modal"
+  },
+  "author": {
+    "name": "Pavlo Glazkov",
+    "email": "pglazkov@independer.nl"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Independer/ind-modal/issues"
+  },
+  "main": "ind-modal.umd.js",
+  "module": "ind-modal.js",
+  "jsnext:main": "ind-modal.js",
+  "typings": "ind-modal.d.ts",
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
+  }
+}
