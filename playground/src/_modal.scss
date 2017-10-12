@@ -1,0 +1,749 @@
+//KEYFRAME ANIMATIONS
+
+$screen-sm-min:              768px;
+$screen-xs-max:              ($screen-sm-min - 1);
+$screen-lg-min:              1200px;
+$screen-md-min:              992px;
+
+$zindex-modal:               1100;
+$zindex-modal-bg:            1050;
+
+$white:     	     	#FFFFFF;
+$grey:              #EFEEEA;
+$purple:            #815F86; // independer purple
+$dark-purple:       #644768;
+$dark-grey:         #CAC9C7;
+$darker-grey: 	    #737373;
+$darkest-grey:      #4B4B4B; // body text
+$border-grey :      #CDCCCC; //only for input border color
+$headings-color:    $purple;
+$border-color:	    $grey;
+
+$font-size-h2:          28px;
+$headings-line-height:  1.1;
+$font-weight-semibold:  600; //to be used with ProximaNova
+
+// ICONS.SCSS: ICONFONT BASE TEMPLATE
+
+@mixin if-generic--styles {
+  font-family: 'generic';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	text-decoration: none;
+	text-transform: none;
+}
+
+%if-generic- {
+	@include if-generic--styles;
+}
+
+@function if-generic--char($filename) {
+	$char: ""; 
+	
+	@if $filename == cross {
+		$char: "\E00C";
+	}
+
+	@return $char;
+}
+
+@mixin if-generic-($filename, $insert: before, $extend: true) {
+	&:#{$insert} {
+		@if $extend {
+			@extend %if-generic-;
+		} @else {
+			@include if-generic--styles;
+		}
+		content: if-generic--char($filename);
+	}
+}
+
+@-webkit-keyframes ind-modal-fadeout {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes ind-modal-fadeout {
+  0% {
+    z-index: auto;
+    opacity: 1;
+  }
+
+  99% {
+    opacity: 0;
+  }
+
+  100% {
+    z-index: -1;
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes ind-modal-fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes ind-modal-fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////// KEYFRAMES /////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//ROTATE IN
+@-webkit-keyframes ind-modal-rotatein {
+  0% {
+    opacity: 0;
+    -webkit-transform: rotateX(-90deg);
+    transform: rotateX(-90deg);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: rotateX(0);
+    transform: rotateX(0);
+  }
+}
+
+@keyframes ind-modal-rotatein {
+  0% {
+    opacity: 0;
+    -webkit-transform: rotateX(-90deg);
+    -ms-transform: rotateX(-90deg);
+    transform: rotateX(-90deg);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: rotateX(0);
+    -ms-transform: rotateX(0);
+    transform: rotateX(0);
+  }
+}
+
+//ROTATE OUT
+@-webkit-keyframes ind-modal-rotateout {
+  0% {
+    opacity: 1;
+    -webkit-transform: rotateX(0);
+    transform: rotateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: rotateX(90deg);
+    transform: rotateX(90deg);
+  }
+}
+
+@keyframes ind-modal-rotateout {
+  0% {
+    opacity: 1;
+    -webkit-transform: rotateX(0);
+    -ms-transform: rotateX(0);
+    transform: rotateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: rotateX(90deg);
+    -ms-transform: rotateX(90deg);
+    transform: rotateX(90deg);
+  }
+}
+
+//SLIDE IN / OUT transitions.
+
+@-webkit-keyframes ind-modal-slidein {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes ind-modal-slidein {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 0;
+  }
+}
+
+@-webkit-keyframes ind-modal-slideout {
+  0% {
+    left: 0;
+  }
+
+  100% {
+    left: -100%;
+  }
+}
+
+@keyframes ind-modal-slideout {
+  0% {
+    left: 0;
+  }
+
+  100% {
+    left: -100%;
+  }
+}
+
+@media(min-width:$screen-sm-min) {
+  @-webkit-keyframes ind-modal-slidein {
+    0% {
+      left: -768px;
+    }
+
+    100% {
+      left: 0;
+    }
+  }
+
+  @keyframes ind-modal-slidein {
+    0% {
+      left: -768px;
+    }
+
+    100% {
+      left: 0;
+    }
+  }
+
+  @-webkit-keyframes ind-modal-slidein--lg {
+    0% {
+      left: -1130px;
+    }
+
+    100% {
+      left: 0;
+    }
+  }
+
+  @keyframes ind-modal-slidein--lg {
+    0% {
+      left: -1130px;
+    }
+
+    100% {
+      left: 0;
+    }
+  }
+
+  @-webkit-keyframes ind-modal-slideout {
+    0% {
+      left: 0;
+    }
+
+    100% {
+      left: -768px;
+    }
+  }
+
+  @keyframes ind-modal-slideout {
+    0% {
+      left: 0;
+    }
+
+    100% {
+      left: -768px;
+    }
+  }
+
+  @-webkit-keyframes ind-modal-slideout--lg {
+    0% {
+      left: 0;
+    }
+
+    100% {
+      left: -1130px;
+    }
+  }
+
+  @keyframes ind-modal-slideout--lg {
+    0% {
+      left: 0;
+    }
+
+    100% {
+      left: -1130px;
+    }
+  }
+}
+
+
+.ind-modal {
+  position: fixed;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: $zindex-modal;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  h2 {
+    font-weight: 300;
+  }
+}
+
+.modal-backdrop {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.4);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $zindex-modal-bg;
+  -webkit-backface-visibility: hidden;
+  height: 200%; // temporary fix for whitespace when scrolling...
+}
+
+.ind-modal-popup .modal-backdrop {
+  -webkit-animation: ind-modal-fadein 0.5s;
+  animation: ind-modal-fadein 0.5s;
+}
+
+.ind-modal-popup.ind-modal-closing .modal-backdrop {
+  -webkit-backface-visibility: hidden;
+  -webkit-animation: ind-modal-fadeout 0.5s;
+  animation: ind-modal-fadeout 0.5s;
+}
+
+.modal-content {
+  z-index: $zindex-modal;
+  background: $white;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translate3d(0,0,1px);
+  transform: translate3d(0,0,1px);
+  &:focus {
+    outline: none;
+  }
+  .close {
+    text-align:center;
+    @include if-generic-(cross, before);
+    cursor:pointer;
+    &:before {
+      font-size: 8px;
+      line-height: 20px;
+      vertical-align: text-bottom;
+    }
+  }
+}
+
+.ind-modal-popup.ind-modal-closing .modal-content {
+  -webkit-backface-visibility: hidden;
+}
+
+body.ind-modal-open {
+  overflow: hidden;
+}
+
+//This fixes an issue with mobile (safari/chrome on IOS), which scrolls the site behind the dialog when scrolling beyond the scroll point
+@media(max-width:$screen-xs-max) {
+  body.ind-modal-open-done {
+    position: fixed;
+    left: 0;
+  }
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////// NGDIALOG THEME POPUP ///////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.ind-modal-popup {
+  -moz-perspective: 1500px;
+  -ms-perspective: 1500px;
+  -webkit-perspective: 1500px;
+  perspective: 1500px;
+  overflow-x: hidden;
+}
+
+.ind-modal-popup .modal-backdrop {
+  background: rgba(69, 44, 73, 0.7);
+  animation: ind-modal-fadein 1s;
+}
+
+.ind-modal-closing .ind-modal-popup .modal-backdrop {
+  -webkit-backface-visibility: hidden;
+  -webkit-animation: ind-modal-fadeout 1s;
+  animation: ind-modal-fadeout 1s;
+}
+
+.ind-modal-popup .modal-content {
+  -webkit-animation: ind-modal-rotatein 1s;
+  animation: ind-modal-rotatein 1s;
+  color: $darkest-grey;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 15px;
+  position: relative;
+  width: 666px;
+}
+.advice-popup .ind-modal-popup .modal-content {
+  width: 825px;
+}
+
+
+.ind-modal-popup.ind-modal-closing .modal-content {
+  -webkit-animation: ind-modal-rotateout 1s;
+  animation: ind-modal-rotateout 1s;
+}
+
+@media(max-width:$screen-sm-min) {
+  .ind-modal-popup .modal-content {
+    -webkit-animation: ind-modal-slidein 1s;
+    animation: ind-modal-slidein 1s;
+  }
+
+  .ind-modal-popup.ind-modal-closing .modal-content {
+    -webkit-animation: ind-modal-slideout 1s;
+    animation: ind-modal-slideout 1s;
+  }
+}
+
+.ind-modal-popup .close {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  width: 38px;
+  height: 38px;
+  color: $border-grey;
+  @include if-generic-(close-button);
+  &:before{font-size:36px;line-height:1em;}
+}
+
+@media(min-width:$screen-sm-min) {
+  .ind-modal-popup .close {
+    right: 50px;
+    top: 30px;
+  }
+}
+
+.ind-modal-popup__small-close-btn .close{
+  width:25px;
+  height:25px;
+  top:15px;
+  right:15px;
+  color:$dark-grey;
+  &:before{font-size:24px;}
+}
+@media(max-width:$screen-xs-max){
+  .ind-modal-popup__small-close-btn .modal-content{padding-top:50px;}
+}
+
+
+@media(min-width:$screen-sm-min) {
+  .ind-modal-popup {
+    padding-bottom: 160px;
+    padding-top: 160px;
+  }
+
+  .ind-modal-popup .modal-content {
+    padding: 40px 50px;
+  }
+}
+
+.ind-modal-popup .modal-header {
+  font-size: $font-size-h2;
+  line-height: $headings-line-height;
+  color: $headings-color;
+  padding-bottom: 13px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid $border-color;
+  font-weight: $font-weight-semibold;
+  padding-right:50px;
+
+  span {
+    padding-right: 40px;
+  }
+}
+
+.ind-modal-popup-anti-bottom-margin{
+  margin-bottom:-15px;
+  @media(min-width:$screen-sm-min){
+    margin-bottom:-40px;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////// STICKY FOOTER FOR POPUP WHEN MOBILE ///////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+@media(max-width:$screen-xs-max){
+  .ind-modal-popup.sticky-footer {
+    .modal-content {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      padding: 0;
+    }
+    .modal-header {
+      padding: 5px 50px 15px 0;
+      margin: 0 15px;
+    }
+    .modal-body {
+      padding: 30px 15px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      overflow-y: auto;
+    }
+    .modal-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: $grey;
+      padding: 0 15px;
+    }
+  }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////// SIDE PANEL /////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.ind-modal-side-panel {
+  overflow-x: hidden;
+  -webkit-user-select: auto !important;
+  user-select: auto !important;
+}
+
+.ind-modal-side-panel .modal-backdrop {
+  background: rgba(69, 44, 73, 0.7);
+  animation: ind-modal-fadein 0.7s;
+}
+
+.advice-popup .ind-modal-popup .modal-backdrop {
+  background: none;
+}
+
+.ind-modal-side-panel.ind-modal-closing .modal-backdrop {
+  -webkit-backface-visibility: hidden;
+  -webkit-animation: ind-modal-fadeout 0.5s;
+  animation: ind-modal-fadeout 0.5s;
+}
+
+.ind-modal-side-panel .modal-content {
+  -webkit-animation: ind-modal-slidein 0.7s;
+  animation: ind-modal-slidein 0.7s;
+  color: $darkest-grey;
+  position: absolute;
+  width: 768px;
+  max-width: 100%;
+  top: 0;
+  bottom: 0;
+  border-right: 2px solid $dark-purple;
+}
+
+.ind-modal-side-panel.ind-modal-closing .modal-content {
+  -webkit-animation: ind-modal-slideout .5s;
+  animation: ind-modal-slideout .5s;
+}
+
+//LARGE version for slide-in-panel
+@media(min-width:$screen-md-min) {
+  .ind-modal-side-panel--lg .modal-content {
+    width: 90%;
+    max-width: 1130px;
+    -webkit-animation: ind-modal-slidein--lg 0.7s;
+    animation: ind-modal-slidein--lg 0.7s;
+  }
+
+  .ind-modal-side-panel--lg .modal-content {
+    width: 90%;
+    max-width: 1130px;
+    -webkit-animation: ind-modal-slidein--lg 0.7s;
+    animation: ind-modal-slidein--lg 0.7s;
+  }
+
+  .ind-modal-side-panel.ind-modal-closing .modal-content {
+    -webkit-animation: ind-modal-slideout-lg .5s;
+    animation: ind-modal-slideout--lg .5s;
+  }
+}
+
+.ind-modal-side-panel .modal-body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto;
+  padding: 15px;
+}
+
+@media(min-width:$screen-sm-min) {
+  .ind-modal-side-panel .modal-body {
+    padding: 30px 50px;
+  }
+}
+
+.ind-modal-side-panel .close {
+  position: absolute;
+  top: 14px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  line-height:20px;
+  cursor: pointer;
+  //ADDED//
+  background-color: darken($purple, 20%);
+  border-radius: 50%;
+  text-align:center;
+  @include if-generic-(cross, after);
+
+  &:after {
+    color: $white;
+    font-size: 12px;
+    line-height: 20px;
+    position: relative;
+    top: 5px;
+  }
+}
+
+@media(min-width:$screen-sm-min) {
+  .ind-modal-side-panel .close {
+    right: 22px;
+    top: 24px;
+  }
+}
+
+.ind-modal-side-panel .close:before {
+  content: none;
+}
+
+.ind-modal-side-panel .close:hover:before,
+.ind-modal-side-panel .close:active:before {
+  color: $darker-grey;
+}
+
+.ind-modal-side-panel .modal-header {
+  font-size: $font-size-h2;
+  line-height: $headings-line-height;
+  color: $white;
+  font-weight: $font-weight-semibold;
+  padding: 15px 65px 15px 15px;
+  background-color: $purple;
+  border-bottom: 3px solid rgba(0,0,0,.07);
+  h1 {
+    color: $white;
+    margin: 0;
+  }
+
+  .dropdown-navigator--back-grey {
+    margin: 0 -65px 0 -15px;
+    position: relative;
+    bottom: -15px;
+    padding: 5px 15px;
+  }
+}
+
+.ind-modal-side-panel .modal-header--purple {
+  color: $white;
+  background: $purple;
+}
+
+.ind-modal-side-panel .modal-header--grey {
+  color: $purple;
+  background-color: $grey;
+}
+
+.ind-modal-side-panel .modal-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+}
+
+.ind-modal-side-panel.purple-footer .modal-footer {
+  background-color: $purple;
+}
+
+@media(min-width:$screen-sm-min) {
+  .ind-modal-side-panel .modal-header {
+    font-size: $font-size-h2;
+    padding: 20px 80px 20px 50px;
+  }
+
+  .ind-modal-side-panel .modal-footer {
+    padding: 20px 50px 20px 50px;
+  }
+}
+
+@media(min-width:$screen-lg-min) {
+  .ind-modal-side-panel .modal-header {
+    font-size: $font-size-h2;
+  }
+}
+
+.ind-modal-side-panel .modal-header select,
+.ind-modal-side-panel .modal-header select.input-control {
+  height: 38px;
+}
+
+
+
+@media (min-width:$screen-sm-min) {
+  .modal-header.header--with-buttons {
+    padding-bottom: 0 !important;
+    border-bottom: 0 !important;
+  }
+
+  .modal-header.header--with-buttons .btn-row {
+    clear: both;
+    background: $white;
+    padding: 20px 30px;
+    margin-left: -50px;
+    margin-right: -80px;
+  }
+
+  .modal-header.header--with-buttons .btn-row img {
+    height: 30px;
+    display: inline;
+    margin-right: 10px;
+  }
+}
+
+.modal-footer {
+  margin-top: 30px;
+}
+div.modal-footer:empty {
+  margin: 0;
+  padding: 0;
+}
+
+.ind-modal-popup .modal-body {
+  padding-top: 30px;
+}

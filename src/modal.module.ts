@@ -20,5 +20,5 @@ import { ModalService } from './modal.service';
     ModalTransclusionsDirective
   ]
 })
-export class ModalModule {
+export class IndModalModule {
 }

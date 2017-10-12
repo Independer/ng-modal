@@ -11,8 +11,7 @@ import { Modal, ModalClosedEventArgs, ModalCloseReason } from './modal';;
   selector: 'ind-modal',
   templateUrl: './modal.component.html',  
   // tslint:disable-next-line:no-forward-ref
-  providers: [{ provide: Modal, useExisting: forwardRef(() => ModalComponent) }],
-  encapsulation: ViewEncapsulation.None
+  providers: [{ provide: Modal, useExisting: forwardRef(() => ModalComponent) }]  
 })
 export class ModalComponent implements Modal, OnInit, OnDestroy {
   @Input() closeOnEscape = true;
