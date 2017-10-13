@@ -1,5 +1,3 @@
-//KEYFRAME ANIMATIONS
-
 $screen-sm-min:              768px;
 $screen-xs-max:              ($screen-sm-min - 1);
 $screen-lg-min:              1200px;
@@ -23,10 +21,16 @@ $font-size-h2:          28px;
 $headings-line-height:  1.1;
 $font-weight-semibold:  600; //to be used with ProximaNova
 
-// ICONS.SCSS: ICONFONT BASE TEMPLATE
+@font-face {
+	font-family: 'modal';
+	src: url('/assets/fonts/modal/modal-bjtpkxr2z.eot');
+	src: url('/assets/fonts/modal/modal-bjtpkxr2z.eot?#iefix') format('eot'),
+		url('/assets/fonts/modal/modal-bjtpkxr2z.woff') format('woff'),
+		url('/assets/fonts/modal/modal-bjtpkxr2z.ttf') format('truetype');
+}
 
-@mixin if-generic--styles {
-  font-family: 'generic';
+@mixin icon--styles {
+  font-family: 'modal';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 	font-style: normal;
@@ -36,28 +40,31 @@ $font-weight-semibold:  600; //to be used with ProximaNova
 	text-transform: none;
 }
 
-%if-generic- {
-	@include if-generic--styles;
+%icon- {
+	@include icon--styles;
 }
 
-@function if-generic--char($filename) {
-	$char: ""; 
-	
+@function icon--char($filename) {
+	$char: "";
+
+	@if $filename == close-button {
+		$char: "\E001";
+	}
 	@if $filename == cross {
-		$char: "\E00C";
+		$char: "\E002";
 	}
 
 	@return $char;
 }
 
-@mixin if-generic-($filename, $insert: before, $extend: true) {
+@mixin icon($filename, $insert: before, $extend: true) {
 	&:#{$insert} {
 		@if $extend {
-			@extend %if-generic-;
+			@extend %icon-;
 		} @else {
-			@include if-generic--styles;
+			@include icon--styles;
 		}
-		content: if-generic--char($filename);
+		content: icon--char($filename);
 	}
 }
 
@@ -348,7 +355,7 @@ $font-weight-semibold:  600; //to be used with ProximaNova
   }
   .close {
     text-align:center;
-    @include if-generic-(cross, before);
+    @include icon(cross, before);
     cursor:pointer;
     &:before {
       font-size: 8px;
@@ -438,7 +445,7 @@ body.ind-modal-open {
   width: 38px;
   height: 38px;
   color: $border-grey;
-  @include if-generic-(close-button);
+  @include icon(close-button);
   &:before{font-size:36px;line-height:1em;}
 }
 
@@ -621,7 +628,7 @@ body.ind-modal-open {
   background-color: darken($purple, 20%);
   border-radius: 50%;
   text-align:center;
-  @include if-generic-(cross, after);
+  @include icon(cross, after);
 
   &:after {
     color: $white;
