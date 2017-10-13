@@ -6,7 +6,10 @@ var gulp = require('gulp'),
   rename = require('gulp-rename'),
   del = require('del'),
   runSequence = require('run-sequence'),
-  inlineResources = require('./tools/gulp/inline-resources');
+  inlineResources = require('./tools/gulp/inline-resources'),
+  sass = require('gulp-sass'),
+  inline_base64 = require('gulp-inline-base64'),
+  autoprefixer = require('gulp-autoprefixer');
 
 const rootFolder = path.join(__dirname);
 const srcFolder = path.join(rootFolder, 'src');
@@ -153,7 +156,23 @@ gulp.task('rollup:umd', function () {
 });
 
 /**
- * 7. Copy all the files from /build to /dist, except .js files. We ignore all .js from /build
+ * 7. Compile SASS
+ */
+gulp.task('compile:sass', function() {
+  return gulp.src([`${srcFolder}/**/*.scss`])
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest(distFolder))
+    .pipe(inline_base64({
+      baseDir: srcFolder        
+    }))
+    .pipe(autoprefixer("last 2 version", "> 1%", {
+      cascade: true
+    }))
+    .pipe(gulp.dest(distFolder));
+});
+
+/**
+ * 8. Copy all the files from /build to /dist, except .js files. We ignore all .js from /build
  *    because with don't need individual modules anymore, just the Flat ES module generated
  *    on step 5.
  */
@@ -163,7 +182,7 @@ gulp.task('copy:build', function () {
 });
 
 /**
- * 8. Copy package.json from /src to /dist
+ * 9. Copy package.json from /src to /dist
  */
 gulp.task('copy:manifest', function () {
   return gulp.src([`${srcFolder}/package.json`])
@@ -171,7 +190,7 @@ gulp.task('copy:manifest', function () {
 });
 
 /**
- * 9. Copy README.md from / to /dist
+ * 10. Copy README.md from / to /dist
  */
 gulp.task('copy:readme', function () {
   return gulp.src([path.join(rootFolder, 'README.MD')])
@@ -179,14 +198,14 @@ gulp.task('copy:readme', function () {
 });
 
 /**
- * 10. Delete /.tmp folder
+ * 11. Delete /.tmp folder
  */
 gulp.task('clean:tmp', function () {
   return deleteFolders([tmpFolder]);
 });
 
 /**
- * 11. Delete /build folder
+ * 12. Delete /build folder
  */
 gulp.task('clean:build', function () {
   return deleteFolders([buildFolder]);
@@ -200,6 +219,7 @@ gulp.task('compile', function () {
     'ngc',
     'rollup:fesm',
     'rollup:umd',
+    'compile:sass',
     'copy:build',
     'copy:manifest',
     'copy:readme',

@@ -19,7 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.scss"
+        "styles.scss",
+        "../node_modules/ind-modal/styles.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
