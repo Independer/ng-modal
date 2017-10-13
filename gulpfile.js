@@ -172,7 +172,16 @@ gulp.task('compile:sass', function() {
 });
 
 /**
- * 8. Copy all the files from /build to /dist, except .js files. We ignore all .js from /build
+ * 8. Copy *.scss files to the /dist so that the application developers
+ * could take them and customize the styles easily. 
+ */
+gulp.task('copy:sass', function() {
+  return gulp.src([`${srcFolder}/**/*.scss`, `${srcFolder}/assets/**/*.*`], {base: srcFolder})
+    .pipe(gulp.dest(distFolder));
+});
+
+/**
+ * 9. Copy all the files from /build to /dist, except .js files. We ignore all .js from /build
  *    because with don't need individual modules anymore, just the Flat ES module generated
  *    on step 5.
  */
@@ -182,7 +191,7 @@ gulp.task('copy:build', function () {
 });
 
 /**
- * 9. Copy package.json from /src to /dist
+ * 10. Copy package.json from /src to /dist
  */
 gulp.task('copy:manifest', function () {
   return gulp.src([`${srcFolder}/package.json`])
@@ -190,7 +199,7 @@ gulp.task('copy:manifest', function () {
 });
 
 /**
- * 10. Copy README.md from / to /dist
+ * 11. Copy README.md from / to /dist
  */
 gulp.task('copy:readme', function () {
   return gulp.src([path.join(rootFolder, 'README.MD')])
@@ -198,14 +207,14 @@ gulp.task('copy:readme', function () {
 });
 
 /**
- * 11. Delete /.tmp folder
+ * 12. Delete /.tmp folder
  */
 gulp.task('clean:tmp', function () {
   return deleteFolders([tmpFolder]);
 });
 
 /**
- * 12. Delete /build folder
+ * 13. Delete /build folder
  */
 gulp.task('clean:build', function () {
   return deleteFolders([buildFolder]);
@@ -220,6 +229,7 @@ gulp.task('compile', function () {
     'rollup:fesm',
     'rollup:umd',
     'compile:sass',
+    'copy:sass',
     'copy:build',
     'copy:manifest',
     'copy:readme',

@@ -25,9 +25,8 @@ $font-weight-semibold:      600;
 @font-face {
 	font-family: 'modal';
 	src: url('/assets/fonts/modal/modal-bjtpkxr2z.eot');
-	src: url('/assets/fonts/modal/modal-bjtpkxr2z.eot?#iefix') format('eot'),
-		url('/assets/fonts/modal/modal-bjtpkxr2z.woff') format('woff'),
-		url('/assets/fonts/modal/modal-bjtpkxr2z.ttf') format('truetype');
+	src: url('/assets/fonts/modal/modal-bjtpkxr2z.woff') format('woff'),
+		   url('/assets/fonts/modal/modal-bjtpkxr2z.ttf') format('truetype');
 }
 
 @mixin icon--styles {
@@ -628,30 +627,3 @@ body {
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
