@@ -1,5 +1,10 @@
 # ind-modal
 
+Lightweight library for opening modal dialogs/panels in Angular applications.
+
+## Demo
+![Demo](/images/demo.gif)
+
 ## Installation
 
 To install this library, run:
@@ -8,50 +13,33 @@ To install this library, run:
 $ npm install ind-modal --save
 ```
 
-## Consuming your library
+## Usage
 
-Once you have published your library to npm, you can import your library in any Angular application by running:
+See the example Angular application in the **playground** folder. 
+
+In order to run the example application you need to first build the library  and link it to **node_modules** in the **playground** folder. Please follow the follosing steps:
 
 ```bash
-$ npm install ind-modal
+# 1. Install dependencies
+yarn install
+
+# 2. Build the library
+npm run build
+
+# 3. Create an NPM link
+npm link
+
+# 4. Go to the "plaground" folder
+cd plaground
+
+# 5. Install dependencies
+yarn install
+
+# 6. Run the example application
+yarn start
 ```
 
-and then from your Angular `AppModule`:
-
-```typescript
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
-
-// Import your library
-import { SampleModule } from 'ind-modal';
-
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-
-    // Specify your library as an import
-    LibraryModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
-```
-
-Once your library is imported, you can use its components, directives and pipes in your Angular application:
-
-```xml
-<!-- You can now use your library component in app.component.html -->
-<h1>
-  {{title}}
-</h1>
-<sampleComponent></sampleComponent>
-```
+Now you can navigate to `http://localhost:4200` to use the **playground**.
 
 ## Development
 
@@ -69,4 +57,4 @@ $ npm run lint
 
 ## License
 
-MIT © [Pavlo Glazkov](mailto:pglazkov@independer.nl)
+MIT © [Independer.nl](https://werkenbij.independer.nl/)
