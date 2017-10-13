@@ -298,411 +298,360 @@ $font-weight-semibold:      600;
   h2 {
     font-weight: 300;
   }
-}
 
-.modal-backdrop {
-  position: fixed;
-  background: $backdrop;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: $zindex-modal-bg;
-  backface-visibility: hidden;
-  height: 200%; // temporary fix for whitespace when scrolling...
-}
-
-.ind-modal-popup .modal-backdrop {
-  animation: ind-modal-fadein 0.5s;
-}
-
-.ind-modal-popup.ind-modal-closing .modal-backdrop {
-  backface-visibility: hidden;
-  animation: ind-modal-fadeout 0.5s;
-}
-
-.modal-content {
-  z-index: $zindex-modal;
-  background: $white;
-  backface-visibility: hidden;
-  transform: translate3d(0,0,1px);
-  &:focus {
-    outline: none;
+  .modal-backdrop {
+    position: fixed;
+    background: $backdrop;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: $zindex-modal-bg;
+    backface-visibility: hidden;
+    height: 200%; // temporary fix for whitespace when scrolling...
   }
-  .close {
-    text-align:center;
-    @include icon(cross, before);
-    cursor:pointer;
-    &:before {
-      font-size: 8px;
-      line-height: 20px;
-      vertical-align: text-bottom;
+
+  .modal-content {
+    z-index: $zindex-modal;
+    background: $white;
+    backface-visibility: hidden;
+    transform: translate3d(0,0,1px);
+    &:focus {
+      outline: none;
+    }
+    .close {
+      text-align:center;
+      @include icon(cross, before);
+      cursor:pointer;
+      &:before {
+        font-size: 8px;
+        line-height: 20px;
+        vertical-align: text-bottom;
+      }
+    }
+
+    .modal-footer {
+      margin-top: 30px;
+
+      &:empty {
+        margin: 0;
+        padding: 0;
+      }
     }
   }
-}
 
-.ind-modal-popup.ind-modal-closing .modal-content {
-  backface-visibility: hidden;
-}
-
-body.ind-modal-open {
-  overflow: hidden;
-}
-
-//This fixes an issue with mobile (safari/chrome on IOS), which scrolls the site behind the dialog when scrolling beyond the scroll point
-@media(max-width:$screen-xs-max) {
-  body.ind-modal-open-done {
-    position: fixed;
-    left: 0;
-  }
-}
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////// NGDIALOG THEME POPUP ///////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-.ind-modal-popup {
-  perspective: 1500px;
-  overflow-x: hidden;
-}
-
-.ind-modal-popup .modal-backdrop {
-  background: $backdrop;
-  animation: ind-modal-fadein 1s;
-}
-
-.ind-modal-closing .ind-modal-popup .modal-backdrop {
-  backface-visibility: hidden;
-  animation: ind-modal-fadeout 1s;
-}
-
-.ind-modal-popup .modal-content {
-  animation: ind-modal-rotatein 1s;
-  color: $darkest-grey;
-  margin: 0 auto;
-  max-width: 100%;
-  padding: 15px;
-  position: relative;
-  width: 666px;
-}
-
-.ind-modal-popup.ind-modal-closing .modal-content {
-  animation: ind-modal-rotateout 1s;
-}
-
-@media(max-width:$screen-sm-min) {
-  .ind-modal-popup .modal-content {
-    animation: ind-modal-slidein 1s;
+  &.ind-modal-closing {
+    .ind-modal-popup {
+      .modal-backdrop {
+        backface-visibility: hidden;
+        animation: ind-modal-fadeout 1s;
+      }
+    }
   }
 
-  .ind-modal-popup.ind-modal-closing .modal-content {
-    animation: ind-modal-slideout 1s;
-  }
-}
+  &.ind-modal-popup {
+    perspective: 1500px;
+    overflow-x: hidden;
 
-.ind-modal-popup .close {
-  cursor: pointer;
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  width: 38px;
-  height: 38px;
-  color: $border-grey;
-  @include icon(close-button);
-  &:before{font-size:36px;line-height:1em;}
-}
+    .modal-backdrop {
+      background: $backdrop;
+      animation: ind-modal-fadein 1s;
+    }    
 
-@media(min-width:$screen-sm-min) {
-  .ind-modal-popup .close {
-    right: 30px;
-    top: 20px;
-  }
-}
-
-.ind-modal-popup__small-close-btn .close{
-  width:25px;
-  height:25px;
-  top:15px;
-  right:15px;
-  color:$dark-grey;
-  &:before{font-size:24px;}
-}
-@media(max-width:$screen-xs-max){
-  .ind-modal-popup__small-close-btn .modal-content{padding-top:50px;}
-}
-
-
-@media(min-width:$screen-sm-min) {
-  .ind-modal-popup {
-    padding-bottom: 160px;
-    padding-top: 160px;
-  }
-
-  .ind-modal-popup .modal-content {
-    padding: 30px 30px;
-  }
-}
-
-.ind-modal-popup .modal-header {
-  font-size: $font-size-h2;
-  line-height: $headings-line-height;
-  color: $headings-color;
-  padding-bottom: 13px;
-  margin-bottom: 20px;
-  border-bottom: 2px solid $border-color;
-  font-weight: $font-weight-semibold;
-  padding-right:50px;
-
-  span {
-    padding-right: 40px;
-  }
-}
-
-.ind-modal-popup-anti-bottom-margin{
-  margin-bottom:-15px;
-  @media(min-width:$screen-sm-min){
-    margin-bottom:-40px;
-  }
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////// STICKY FOOTER FOR POPUP WHEN MOBILE ///////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-@media(max-width:$screen-xs-max){
-  .ind-modal-popup.sticky-footer {
     .modal-content {
+      animation: ind-modal-rotatein 1s;
+      color: $darkest-grey;
+      margin: 0 auto;
+      max-width: 100%;
+      padding: 15px;
+      position: relative;      
+
+      .modal-header {
+        font-size: $font-size-h2;
+        line-height: $headings-line-height;
+        color: $headings-color;
+        padding-bottom: 13px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid $border-color;
+        font-weight: $font-weight-semibold;
+        padding-right:50px;
+      
+        span {
+          padding-right: 40px;
+        }
+      }
+
+      .modal-body {
+        padding-top: 30px;
+      }
+    }
+  
+    &.ind-modal-closing {
+      .modal-backdrop {
+        animation: ind-modal-fadeout 0.5s;
+        backface-visibility: hidden;        
+      }
+
+      .modal-content {
+        animation: ind-modal-rotateout 1s;
+        backface-visibility: hidden;       
+      }
+    }
+
+    .close {
+      cursor: pointer;
       position: absolute;
+      top: 10px;
+      right: 15px;
+      width: 38px;
+      height: 38px;
+      color: $border-grey;
+      @include icon(close-button);
+      &:before {
+        font-size:36px;
+        line-height:1em;
+      }
+    }
+
+    @media(max-width:$screen-sm-min) { 
+      .modal-content {
+        animation: ind-modal-slidein 1s;        
+      }
+    
+      &.ind-modal-closing {
+        .modal-content {
+          animation: ind-modal-slideout 1s;
+        }
+      }
+    }
+    
+    @media(min-width:$screen-sm-min) {
+      padding-bottom: 160px;
+      padding-top: 160px;
+
+      .modal-content {
+        padding: 30px 30px;
+        width: 666px;
+      }
+
+      .close {
+        right: 30px;
+        top: 20px;
+      }
+    }
+
+    @media(max-width:$screen-xs-max){
+      &.sticky-footer {
+        .modal-content {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          padding: 0;
+
+          .modal-header {
+            padding: 5px 50px 15px 0;
+            margin: 0 15px;
+          }
+          .modal-body {
+            padding: 30px 15px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            overflow-y: auto;
+          }
+          .modal-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: $grey;
+            padding: 0 15px;
+          }
+        }       
+      }
+    }
+  }
+
+  &.ind-modal-side-panel {
+    overflow-x: hidden;
+    user-select: auto !important;
+    
+    .modal-backdrop {
+      background: $backdrop;
+      animation: ind-modal-fadein 0.7s;
+    }
+  
+    .modal-content {
+      animation: ind-modal-slidein 0.7s;
+      color: $darkest-grey;
+      position: absolute;
+      width: 768px;
+      max-width: 100%;
       top: 0;
       bottom: 0;
-      padding: 0;
+      border-right: 2px solid $dark-purple;
+  
+      .modal-header {
+        font-size: $font-size-h2;
+        line-height: $headings-line-height;
+        color: $white;
+        font-weight: $font-weight-semibold;
+        padding: 15px 65px 15px 15px;
+        background-color: $purple;
+        border-bottom: 3px solid rgba(0,0,0,.07);
+        h1 {
+          color: $white;
+          margin: 0;
+        }
+      }
+      
+      .modal-body {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        overflow-y: auto;
+        padding: 15px;
+      }
+  
+      .modal-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 15px;
+      }
     }
-    .modal-header {
-      padding: 5px 50px 15px 0;
-      margin: 0 15px;
-    }
-    .modal-body {
-      padding: 30px 15px;
+    
+    .close {
       position: absolute;
-      left: 0;
-      right: 0;
-      overflow-y: auto;
+      top: 14px;
+      right: 15px;
+      width: 30px;
+      height: 30px;
+      line-height:20px;
+      cursor: pointer;
+      //ADDED//
+      background-color: darken($purple, 20%);
+      border-radius: 50%;
+      text-align:center;
+      @include icon(cross, after);
+  
+      &:after {
+        color: $white;
+        font-size: 12px;
+        line-height: 20px;
+        position: relative;
+        top: 5px;
+      }
+  
+      &:before {
+        content: none;
+      }
+  
+      &:hover:before,
+      &:active:before {
+        color: $darker-grey;
+      }
     }
-    .modal-footer {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: $grey;
-      padding: 0 15px;
+  
+    &.ind-modal-closing {
+      .modal-backdrop {
+        backface-visibility: hidden;
+        animation: ind-modal-fadeout 0.5s;
+      }
+      
+      .modal-content {
+        animation: ind-modal-slideout .5s;
+      }
+    }
+  
+    @media(min-width:$screen-sm-min) {
+      .modal-content {
+        .modal-header {
+          font-size: $font-size-h2;
+          padding: 20px 80px 20px 50px;
+        }    
+        
+        .modal-body {
+          padding: 30px 50px;
+        }
+  
+        .modal-footer {
+          padding: 20px 50px 20px 50px;
+        }
+      }
+  
+      .close {
+        right: 22px;
+        top: 24px;
+      }    
+    }
+  
+    @media(min-width:$screen-md-min) {
+      &.ind-modal-closing {
+        .modal-content {
+          animation: ind-modal-slideout--lg .5s;
+        }
+      }
+
+      &.ind-modal-side-panel--lg {
+        .modal-content {
+          width: 90%;
+          max-width: 1130px;
+          animation: ind-modal-slidein--lg 0.7s;
+        }
+      }
+    }
+  
+    @media(min-width:$screen-lg-min) {
+      .modal-content {       
+        .modal-header {
+          font-size: $font-size-h2;
+        }
+      }
     }
   }
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////// SIDE PANEL /////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-.ind-modal-side-panel {
-  overflow-x: hidden;
-  user-select: auto !important;
-}
-
-.ind-modal-side-panel .modal-backdrop {
-  background: $backdrop;
-  animation: ind-modal-fadein 0.7s;
-}
-
-.ind-modal-side-panel.ind-modal-closing .modal-backdrop {
-  backface-visibility: hidden;
-  animation: ind-modal-fadeout 0.5s;
-}
-
-.ind-modal-side-panel .modal-content {
-  animation: ind-modal-slidein 0.7s;
-  color: $darkest-grey;
-  position: absolute;
-  width: 768px;
-  max-width: 100%;
-  top: 0;
-  bottom: 0;
-  border-right: 2px solid $dark-purple;
-}
-
-.ind-modal-side-panel.ind-modal-closing .modal-content {
-  animation: ind-modal-slideout .5s;
-}
-
-//LARGE version for slide-in-panel
-@media(min-width:$screen-md-min) {
-  .ind-modal-side-panel--lg .modal-content {
-    width: 90%;
-    max-width: 1130px;
-    animation: ind-modal-slidein--lg 0.7s;
+body {
+  &.ind-modal-open {
+    overflow: hidden;
   }
 
-  .ind-modal-side-panel--lg .modal-content {
-    width: 90%;
-    max-width: 1130px;
-    animation: ind-modal-slidein--lg 0.7s;
-  }
-
-  .ind-modal-side-panel.ind-modal-closing .modal-content {
-    animation: ind-modal-slideout--lg .5s;
+  //This fixes an issue with mobile (safari/chrome on IOS), which scrolls the site behind the dialog when scrolling beyond the scroll point
+  @media(max-width:$screen-xs-max) {
+    &.ind-modal-open-done {
+      position: fixed;
+      left: 0;
+    }
   }
 }
 
-.ind-modal-side-panel .modal-body {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  overflow-y: auto;
-  padding: 15px;
-}
-
-@media(min-width:$screen-sm-min) {
-  .ind-modal-side-panel .modal-body {
-    padding: 30px 50px;
-  }
-}
-
-.ind-modal-side-panel .close {
-  position: absolute;
-  top: 14px;
-  right: 15px;
-  width: 30px;
-  height: 30px;
-  line-height:20px;
-  cursor: pointer;
-  //ADDED//
-  background-color: darken($purple, 20%);
-  border-radius: 50%;
-  text-align:center;
-  @include icon(cross, after);
-
-  &:after {
-    color: $white;
-    font-size: 12px;
-    line-height: 20px;
-    position: relative;
-    top: 5px;
-  }
-}
-
-@media(min-width:$screen-sm-min) {
-  .ind-modal-side-panel .close {
-    right: 22px;
-    top: 24px;
-  }
-}
-
-.ind-modal-side-panel .close:before {
-  content: none;
-}
-
-.ind-modal-side-panel .close:hover:before,
-.ind-modal-side-panel .close:active:before {
-  color: $darker-grey;
-}
-
-.ind-modal-side-panel .modal-header {
-  font-size: $font-size-h2;
-  line-height: $headings-line-height;
-  color: $white;
-  font-weight: $font-weight-semibold;
-  padding: 15px 65px 15px 15px;
-  background-color: $purple;
-  border-bottom: 3px solid rgba(0,0,0,.07);
-  h1 {
-    color: $white;
-    margin: 0;
-  }
-
-  .dropdown-navigator--back-grey {
-    margin: 0 -65px 0 -15px;
-    position: relative;
-    bottom: -15px;
-    padding: 5px 15px;
-  }
-}
-
-.ind-modal-side-panel .modal-header--purple {
-  color: $white;
-  background: $purple;
-}
-
-.ind-modal-side-panel .modal-header--grey {
-  color: $purple;
-  background-color: $grey;
-}
-
-.ind-modal-side-panel .modal-footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 15px;
-}
-
-.ind-modal-side-panel.purple-footer .modal-footer {
-  background-color: $purple;
-}
-
-@media(min-width:$screen-sm-min) {
-  .ind-modal-side-panel .modal-header {
-    font-size: $font-size-h2;
-    padding: 20px 80px 20px 50px;
-  }
-
-  .ind-modal-side-panel .modal-footer {
-    padding: 20px 50px 20px 50px;
-  }
-}
-
-@media(min-width:$screen-lg-min) {
-  .ind-modal-side-panel .modal-header {
-    font-size: $font-size-h2;
-  }
-}
-
-.ind-modal-side-panel .modal-header select,
-.ind-modal-side-panel .modal-header select.input-control {
-  height: 38px;
-}
 
 
 
-@media (min-width:$screen-sm-min) {
-  .modal-header.header--with-buttons {
-    padding-bottom: 0 !important;
-    border-bottom: 0 !important;
-  }
 
-  .modal-header.header--with-buttons .btn-row {
-    clear: both;
-    background: $white;
-    padding: 20px 30px;
-    margin-left: -50px;
-    margin-right: -80px;
-  }
 
-  .modal-header.header--with-buttons .btn-row img {
-    display: inline;
-    margin-right: 10px;
-  }
-}
 
-.modal-footer {
-  margin-top: 30px;
-}
-div.modal-footer:empty {
-  margin: 0;
-  padding: 0;
-}
 
-.ind-modal-popup .modal-body {
-  padding-top: 30px;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -16,7 +16,6 @@ export class ModalComponent implements Modal, OnInit, OnDestroy {
   @Input() closeOnOutsideClick = true;
   @Input() showCloseButton = true;
   @Input() type: 'popup' | 'side-panel' | 'large-side-panel' = 'popup';
-  @Input() footerTheme: 'default' | 'purple' = 'default';
   @Input() stickyFooter = false;
   @Input() routeBehavior = false;
 
