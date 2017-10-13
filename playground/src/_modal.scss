@@ -1,25 +1,26 @@
-$screen-sm-min:              768px;
-$screen-xs-max:              ($screen-sm-min - 1);
-$screen-lg-min:              1200px;
-$screen-md-min:              992px;
+$screen-sm-min:             768px;
+$screen-xs-max:             ($screen-sm-min - 1);
+$screen-lg-min:             1200px;
+$screen-md-min:             992px;
 
-$zindex-modal:               1100;
-$zindex-modal-bg:            1050;
+$zindex-modal:              1100;
+$zindex-modal-bg:           1050;
 
-$white:     	     	#FFFFFF;
-$grey:              #EFEEEA;
-$purple:            #815F86; // independer purple
-$dark-purple:       #644768;
-$dark-grey:         #CAC9C7;
-$darker-grey: 	    #737373;
-$darkest-grey:      #4B4B4B; // body text
-$border-grey :      #CDCCCC; //only for input border color
-$headings-color:    $purple;
-$border-color:	    $grey;
+$white:                     #FFFFFF;
+$grey:                      #EFEEEA;
+$purple:                    #3F51B5;
+$dark-purple:               #1A237E;
+$dark-grey:                 #CAC9C7;
+$darker-grey: 	            #737373;
+$darkest-grey:              #4B4B4B;
+$border-grey :              #CDCCCC;
+$headings-color:            $purple;
+$border-color:              $grey;
+$backdrop:                  rgba(0,0,0,.6);
 
-$font-size-h2:          28px;
-$headings-line-height:  1.1;
-$font-weight-semibold:  600; //to be used with ProximaNova
+$font-size-h2:              28px;
+$headings-line-height:      1.1;
+$font-weight-semibold:      600;
 
 @font-face {
 	font-family: 'modal';
@@ -31,9 +32,8 @@ $font-weight-semibold:  600; //to be used with ProximaNova
 
 @mixin icon--styles {
   font-family: 'modal';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-	font-style: normal;
+  font-smoothing: antialiased;
+  font-style: normal;
 	font-variant: normal;
 	font-weight: normal;
 	text-decoration: none;
@@ -114,22 +114,14 @@ $font-weight-semibold:  600; //to be used with ProximaNova
   }
 }
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////// KEYFRAMES /////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//ROTATE IN
 @-webkit-keyframes ind-modal-rotatein {
   0% {
     opacity: 0;
-    -webkit-transform: rotateX(-90deg);
     transform: rotateX(-90deg);
   }
 
   100% {
     opacity: 1;
-    -webkit-transform: rotateX(0);
     transform: rotateX(0);
   }
 }
@@ -137,30 +129,23 @@ $font-weight-semibold:  600; //to be used with ProximaNova
 @keyframes ind-modal-rotatein {
   0% {
     opacity: 0;
-    -webkit-transform: rotateX(-90deg);
-    -ms-transform: rotateX(-90deg);
     transform: rotateX(-90deg);
   }
 
   100% {
     opacity: 1;
-    -webkit-transform: rotateX(0);
-    -ms-transform: rotateX(0);
     transform: rotateX(0);
   }
 }
 
-//ROTATE OUT
 @-webkit-keyframes ind-modal-rotateout {
   0% {
     opacity: 1;
-    -webkit-transform: rotateX(0);
     transform: rotateX(0);
   }
 
   100% {
     opacity: 0;
-    -webkit-transform: rotateX(90deg);
     transform: rotateX(90deg);
   }
 }
@@ -168,20 +153,14 @@ $font-weight-semibold:  600; //to be used with ProximaNova
 @keyframes ind-modal-rotateout {
   0% {
     opacity: 1;
-    -webkit-transform: rotateX(0);
-    -ms-transform: rotateX(0);
     transform: rotateX(0);
   }
 
   100% {
     opacity: 0;
-    -webkit-transform: rotateX(90deg);
-    -ms-transform: rotateX(90deg);
     transform: rotateX(90deg);
   }
 }
-
-//SLIDE IN / OUT transitions.
 
 @-webkit-keyframes ind-modal-slidein {
   0% {
@@ -323,32 +302,29 @@ $font-weight-semibold:  600; //to be used with ProximaNova
 
 .modal-backdrop {
   position: fixed;
-  background: rgba(0, 0, 0, 0.4);
+  background: $backdrop;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: $zindex-modal-bg;
-  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   height: 200%; // temporary fix for whitespace when scrolling...
 }
 
 .ind-modal-popup .modal-backdrop {
-  -webkit-animation: ind-modal-fadein 0.5s;
   animation: ind-modal-fadein 0.5s;
 }
 
 .ind-modal-popup.ind-modal-closing .modal-backdrop {
-  -webkit-backface-visibility: hidden;
-  -webkit-animation: ind-modal-fadeout 0.5s;
+  backface-visibility: hidden;
   animation: ind-modal-fadeout 0.5s;
 }
 
 .modal-content {
   z-index: $zindex-modal;
   background: $white;
-  -webkit-backface-visibility: hidden;
-  -webkit-transform: translate3d(0,0,1px);
+  backface-visibility: hidden;
   transform: translate3d(0,0,1px);
   &:focus {
     outline: none;
@@ -366,7 +342,7 @@ $font-weight-semibold:  600; //to be used with ProximaNova
 }
 
 .ind-modal-popup.ind-modal-closing .modal-content {
-  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 body.ind-modal-open {
@@ -387,26 +363,21 @@ body.ind-modal-open {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 .ind-modal-popup {
-  -moz-perspective: 1500px;
-  -ms-perspective: 1500px;
-  -webkit-perspective: 1500px;
   perspective: 1500px;
   overflow-x: hidden;
 }
 
 .ind-modal-popup .modal-backdrop {
-  background: rgba(69, 44, 73, 0.7);
+  background: $backdrop;
   animation: ind-modal-fadein 1s;
 }
 
 .ind-modal-closing .ind-modal-popup .modal-backdrop {
-  -webkit-backface-visibility: hidden;
-  -webkit-animation: ind-modal-fadeout 1s;
+  backface-visibility: hidden;
   animation: ind-modal-fadeout 1s;
 }
 
 .ind-modal-popup .modal-content {
-  -webkit-animation: ind-modal-rotatein 1s;
   animation: ind-modal-rotatein 1s;
   color: $darkest-grey;
   margin: 0 auto;
@@ -415,24 +386,17 @@ body.ind-modal-open {
   position: relative;
   width: 666px;
 }
-.advice-popup .ind-modal-popup .modal-content {
-  width: 825px;
-}
-
 
 .ind-modal-popup.ind-modal-closing .modal-content {
-  -webkit-animation: ind-modal-rotateout 1s;
   animation: ind-modal-rotateout 1s;
 }
 
 @media(max-width:$screen-sm-min) {
   .ind-modal-popup .modal-content {
-    -webkit-animation: ind-modal-slidein 1s;
     animation: ind-modal-slidein 1s;
   }
 
   .ind-modal-popup.ind-modal-closing .modal-content {
-    -webkit-animation: ind-modal-slideout 1s;
     animation: ind-modal-slideout 1s;
   }
 }
@@ -451,8 +415,8 @@ body.ind-modal-open {
 
 @media(min-width:$screen-sm-min) {
   .ind-modal-popup .close {
-    right: 50px;
-    top: 30px;
+    right: 30px;
+    top: 20px;
   }
 }
 
@@ -476,7 +440,7 @@ body.ind-modal-open {
   }
 
   .ind-modal-popup .modal-content {
-    padding: 40px 50px;
+    padding: 30px 30px;
   }
 }
 
@@ -542,27 +506,20 @@ body.ind-modal-open {
 
 .ind-modal-side-panel {
   overflow-x: hidden;
-  -webkit-user-select: auto !important;
   user-select: auto !important;
 }
 
 .ind-modal-side-panel .modal-backdrop {
-  background: rgba(69, 44, 73, 0.7);
+  background: $backdrop;
   animation: ind-modal-fadein 0.7s;
 }
 
-.advice-popup .ind-modal-popup .modal-backdrop {
-  background: none;
-}
-
 .ind-modal-side-panel.ind-modal-closing .modal-backdrop {
-  -webkit-backface-visibility: hidden;
-  -webkit-animation: ind-modal-fadeout 0.5s;
+  backface-visibility: hidden;
   animation: ind-modal-fadeout 0.5s;
 }
 
 .ind-modal-side-panel .modal-content {
-  -webkit-animation: ind-modal-slidein 0.7s;
   animation: ind-modal-slidein 0.7s;
   color: $darkest-grey;
   position: absolute;
@@ -574,7 +531,6 @@ body.ind-modal-open {
 }
 
 .ind-modal-side-panel.ind-modal-closing .modal-content {
-  -webkit-animation: ind-modal-slideout .5s;
   animation: ind-modal-slideout .5s;
 }
 
@@ -583,19 +539,16 @@ body.ind-modal-open {
   .ind-modal-side-panel--lg .modal-content {
     width: 90%;
     max-width: 1130px;
-    -webkit-animation: ind-modal-slidein--lg 0.7s;
     animation: ind-modal-slidein--lg 0.7s;
   }
 
   .ind-modal-side-panel--lg .modal-content {
     width: 90%;
     max-width: 1130px;
-    -webkit-animation: ind-modal-slidein--lg 0.7s;
     animation: ind-modal-slidein--lg 0.7s;
   }
 
   .ind-modal-side-panel.ind-modal-closing .modal-content {
-    -webkit-animation: ind-modal-slideout-lg .5s;
     animation: ind-modal-slideout--lg .5s;
   }
 }
@@ -737,7 +690,6 @@ body.ind-modal-open {
   }
 
   .modal-header.header--with-buttons .btn-row img {
-    height: 30px;
     display: inline;
     margin-right: 10px;
   }

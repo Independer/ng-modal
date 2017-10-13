@@ -1,5 +1,3 @@
-// Partialy based on https://github.com/pleerock/ng2-modal (exact version: https://github.com/pleerock/ng2-modal/tree/24021998b90999abe0d87b904faf1eeb64a08ce5)
-
 import {
   Component, Input, Output, EventEmitter, ElementRef, ViewChild, OnDestroy, HostListener,
   forwardRef, ViewEncapsulation, OnInit
