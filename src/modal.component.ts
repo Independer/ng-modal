@@ -1,15 +1,15 @@
 import {
   Component, Input, Output, EventEmitter, ElementRef, ViewChild, OnDestroy, HostListener,
-  forwardRef, ViewEncapsulation, OnInit
+  forwardRef, OnInit
 } from '@angular/core';
 import { ModalBodyStylingHelper } from './modal-body-styling.helper';
-import { Modal, ModalClosedEventArgs, ModalCloseReason } from './modal';;
+import { Modal, ModalClosedEventArgs, ModalCloseReason } from './modal';
 
 @Component({
   selector: 'ind-modal',
-  templateUrl: './modal.component.html',  
+  templateUrl: './modal.component.html',
   // tslint:disable-next-line:no-forward-ref
-  providers: [{ provide: Modal, useExisting: forwardRef(() => ModalComponent) }]  
+  providers: [{ provide: Modal, useExisting: forwardRef(() => ModalComponent) }]
 })
 export class ModalComponent implements Modal, OnInit, OnDestroy {
   @Input() closeOnEscape = true;
@@ -28,7 +28,7 @@ export class ModalComponent implements Modal, OnInit, OnDestroy {
   @ViewChild('footer') footerElement: ElementRef;
 
   isOpened = false;
-  isClosing = false;  
+  isClosing = false;
 
   @HostListener('window:resize')
   onWindowResize() {

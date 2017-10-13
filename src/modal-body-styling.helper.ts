@@ -52,7 +52,7 @@ export class ModalBodyStylingHelper {
 
     // Return a function that restores the styles back.
     return () => {
-      //do not try to remove all the classes in one line, as IE is not able to interpret it. Each class should be removed separately.
+      // do not try to remove all the classes in one line, as IE is not able to interpret it. Each class should be removed separately.
       document.body.classList.remove('ind-modal-open');
       document.body.classList.remove('ind-modal-open-done');
       document.body.classList.remove('ind-modal-padded');
