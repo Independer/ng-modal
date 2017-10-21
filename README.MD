@@ -68,7 +68,7 @@ Then open the dialog as follows:
 ```
 
 ### Option 2 - Separate component + ModalService
-Define your modal dialog as separate component.
+Define your modal dialog as a separate component.
 
 **modal.component.html**
 ```html
@@ -97,9 +97,9 @@ export class ModalComponent extends ModalComponentBase {
 }
 
 ```
-Note that the component has to extend from `ModalComponentBase`.
+Note that the component has to extend `ModalComponentBase`.
 
-**Important**: Make sure you add your component to `entryComponent` inside `@NgModule` declaration:
+**Important**: Make sure you add your component to `entryComponents` inside `@NgModule` declaration:
 
 ```ts
 @NgModule({
@@ -203,11 +203,11 @@ Open the panel by navigating to `/modal-component`:
 <button [routerLink]="['modal-component']">child route modal component</button>
 ```
 
-### Plaground App
+### Playground App
 
 See the above examples in action by running the Angular app in the **playground** folder. 
 
-In order to run the example application you need to first build the library  and link it to **node_modules** in the **playground** folder. Please follow the follosing steps:
+In order to run the example application you need to first build the library and link it to **node_modules** in the **playground** folder. Please follow the following steps:
 
 ```bash
 # 1. Install dependencies
@@ -222,8 +222,8 @@ cd dist
 # 4.  Create an NPM link
 npm link
 
-# 4. Go to the "plaground" folder
-cd ../plaground
+# 4. Go to the "playground" folder
+cd ../playground
 
 # 5. Install dependencies
 yarn install
