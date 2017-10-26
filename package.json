@@ -27,6 +27,7 @@
     "url": "https://github.com/Independer/ind-modal/issues"
   },
   "devDependencies": {
+    "@angular/cdk": "^2.0.0-beta.12",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/compiler-cli": "^4.0.0",

@@ -20,6 +20,9 @@
   "module": "ind-modal.js",
   "jsnext:main": "ind-modal.js",
   "typings": "ind-modal.d.ts",
+  "dependencies": {
+    "@angular/cdk": "^2.0.0-beta.12"
+  },
   "peerDependencies": {
     "@angular/core": ">=4.0.0",
     "@angular/common": ">=4.0.0",
