@@ -89,13 +89,14 @@ gulp.task('rollup:fesm', function () {
         '@angular/core',
         '@angular/common',
         '@angular/cdk/portal',
-        'rxjs/add/operator/first'
+        'rxjs/operator/first'
       ],
 
       globals: {
         '@angular/core': 'core',
         '@angular/common': 'common',
-        '@angular/cdk/portal': 'portal'
+        '@angular/cdk/portal': 'portal',
+        'rxjs/operator/first': 'first'
       },
 
       // Format of generated bundle
@@ -130,7 +131,7 @@ gulp.task('rollup:umd', function () {
         '@angular/core',
         '@angular/common',
         '@angular/cdk/portal',
-        'rxjs/add/operator/first'
+        'rxjs/operator/first'
       ],
 
       // Format of generated bundle
@@ -151,7 +152,8 @@ gulp.task('rollup:umd', function () {
         typescript: 'ts',
         '@angular/core': 'core',
         '@angular/common': 'common',
-        '@angular/cdk/portal': 'portal'
+        '@angular/cdk/portal': 'portal',
+        'rxjs/operator/first': 'first'
       }
 
     }))

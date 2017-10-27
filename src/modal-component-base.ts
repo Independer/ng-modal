@@ -1,6 +1,6 @@
 import { OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/first';
+import { first } from 'rxjs/operator/first';
 import { Modal, ModalClosedEventArgs } from './modal';
 
 export abstract class ModalComponentBase implements Modal, OnInit {
@@ -30,7 +30,7 @@ export abstract class ModalComponentBase implements Modal, OnInit {
     // events can be fired multiple times normally, but not in this case) - this can cause problems when we
     // convert Observable to a Promise (using Observable.fromPromise), in which case the Promise will never
     // resolve until the observable sequence is completed.
-    return this.modal.closed.first();
+    return first.call(this.modal.closed);
   }
 
   protected onClosed(args: ModalClosedEventArgs) {
