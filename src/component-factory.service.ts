@@ -1,6 +1,6 @@
 import {
   ApplicationRef, ComponentFactoryResolver, ComponentRef,
-  EmbeddedViewRef, Injectable, Injector, Type, ViewContainerRef
+  Injectable, Injector, Type, ViewContainerRef
 } from '@angular/core';
 
 import {
@@ -9,11 +9,6 @@ import {
   ComponentPortal,
   DomPortalHost
 } from '@angular/cdk/portal';
-
-export interface ModalComponentRef<T> {
-  instance: T;
-  dispose();
-}
 
 @Injectable()
 export class ComponentFactoryService {
@@ -35,24 +30,48 @@ export class ComponentFactoryService {
    */
   createComponent<T>(
       componentType: Type<T>,
-      location?: HTMLElement,
-      injector?: Injector): ModalComponentRef<T> {
+      location?: HTMLElement | ViewContainerRef,
+      injector?: Injector): ComponentRef<T> {
 
-    let componentPortal = new ComponentPortal(componentType);
+    // The location where the component should live in Angular's logical component tree, where
+    // it will be part of change detection, etc.
+    // This is different from where the component renders, which is determined by the PortalHost.
+    let logicalLocation: ViewContainerRef | undefined = undefined;
 
+    // Host element for rendering the component. By default, use "body".
+    let domLocation: HTMLElement = document.body;
+
+    if (location) {
+      if (location instanceof HTMLElement) {
+        // The location was provided as an arbitrary element and we don't
+        // know if it is part of the Angular app, so leave it "undefined"
+        // and let the PortalHost take care of attaching it to the Angular app.
+        logicalLocation = undefined;
+        domLocation = location;
+      }
+      else {
+        // Location is ViewContainerRef, so use it as the logical tree location as well as actuall
+        // render location.
+        logicalLocation = location;
+        domLocation = location.element.nativeElement;
+      }
+    }
+
+    // Create a Portal based on the given component type
+    let componentPortal = new ComponentPortal(componentType, logicalLocation, injector);
+
+    // Create a PortalHost with the specified location as its anchor element
     let bodyPortalHost = new DomPortalHost(
-      location || document.body,
+      domLocation,
       this.cfr,
       this.appRef,
       injector || this.defaultInjector);
 
+    // Attach the Portal to the PortalHost. This will instantiate the component and add
+    // it to the DOM. We get a ComponentRef back that we can use to access the component
+    // instance as well as destroy the component after we're done with it.
     let componentRef = bodyPortalHost.attach(componentPortal) as ComponentRef<T>;
 
-    return {
-      instance: componentRef.instance,
-      dispose: () => {
-        bodyPortalHost.detach();
-      }
-    };
+    return componentRef;
   }
 }

@@ -13,7 +13,7 @@ export class ModalService {
     componentRef.instance.open();
 
     componentRef.instance.closed.subscribe(() => {
-      componentRef.dispose();
+      componentRef.destroy();
     });
 
     return componentRef.instance;
