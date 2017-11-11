@@ -90,7 +90,7 @@ export class ModalComponent implements Modal, OnInit, OnDestroy {
   }
 
   protected doClose(reason: ModalCloseReason, result?: any) {
-    if (!this.isOpened) {
+    if (!this.isOpened || this.isClosing) {
       return;
     }
 
