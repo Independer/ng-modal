@@ -1,0 +1,466 @@
+// .modal-open      - body class for killing the scroll
+// .modal           - container to scroll within
+// .modal-dialog    - positioning shell for the actual modal
+// .modal-content   - actual modal w/ bg and corners and stuff
+
+$white:                             #fff !default;
+$gray-100:                          #f8f9fa !default;
+$gray-200:                          #e9ecef !default;
+$gray-300:                          #dee2e6 !default;
+$gray-400:                          #ced4da !default;
+$gray-500:                          #adb5bd !default;
+$gray-600:                          #868e96 !default;
+$gray-700:                          #495057 !default;
+$gray-800:                          #343a40 !default;
+$gray-900:                          #212529 !default;
+$black:                             #000 !default;
+
+$zindex-modal-backdrop:             1040 !default;
+$zindex-modal:                      1050 !default;
+
+$border-width:                      1px !default;
+$line-height-base:                  1.5 !default;
+
+$enable-transitions:                true !default;
+$transition-base:                   all .2s ease-in-out !default;
+
+$border-radius:                     .25rem !default;
+$border-radius-lg:                  .3rem !default;
+$border-radius-sm:                  .2rem !default;
+$enable-rounded:                    true !default;
+
+$enable-shadows:                    false !default;
+
+$grid-breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px
+) !default;
+
+$enable-hover-media-query:          false !default;
+
+$font-size-base:                    1rem !default; // Assumes the browser default, typically `16px`
+$font-size-lg:                      ($font-size-base * 1.25) !default;
+$font-size-sm:                      ($font-size-base * .875) !default;
+
+$font-weight-light:                 300 !default;
+$font-weight-normal:                400 !default;
+$font-weight-bold:                  700 !default;
+
+$zindex-modal-backdrop:             1040 !default;
+$zindex-modal:                      1050 !default;
+
+$modal-inner-padding:               1rem !default;
+
+$modal-dialog-margin:               .5rem !default;
+$modal-dialog-margin-y-sm-up:       1.75rem !default;
+$modal-title-line-height:           $line-height-base !default;
+
+$modal-content-bg:                  $white !default;
+$modal-content-border-color:        rgba($black, .2) !default;
+$modal-content-border-width:        $border-width !default;
+$modal-content-box-shadow-xs:       0 .25rem .5rem rgba($black, .5) !default;
+$modal-content-box-shadow-sm-up:    0 .5rem 1rem rgba($black, .5) !default;
+
+$modal-backdrop-bg:                 $black !default;
+$modal-backdrop-opacity:            .5 !default;
+$modal-header-border-color:         $gray-200 !default;
+$modal-footer-border-color:         $modal-header-border-color !default;
+$modal-header-border-width:         $modal-content-border-width !default;
+$modal-footer-border-width:         $modal-header-border-width !default;
+$modal-header-padding:              1rem !default;
+
+$modal-lg:                          800px !default;
+$modal-md:                          500px !default;
+$modal-sm:                          300px !default;
+
+$modal-transition:                  transform .3s ease-out !default;
+
+$close-font-size:                   $font-size-base * 1.5 !default;
+$close-font-weight:                 $font-weight-bold !default;
+$close-color:                       $black !default;
+$close-text-shadow:                 0 1px 0 $white !default;
+
+@mixin transition($transition...) {
+  @if $enable-transitions {
+    @if length($transition) == 0 {
+      transition: $transition-base;
+    } @else {
+      transition: $transition;
+    }
+  }
+}
+
+// Single side border-radius
+
+@mixin border-radius($radius: $border-radius) {
+  @if $enable-rounded {
+    border-radius: $radius;
+  }
+}
+
+@mixin border-top-radius($radius) {
+  @if $enable-rounded {
+    border-top-left-radius: $radius;
+    border-top-right-radius: $radius;
+  }
+}
+
+@mixin border-right-radius($radius) {
+  @if $enable-rounded {
+    border-top-right-radius: $radius;
+    border-bottom-right-radius: $radius;
+  }
+}
+
+@mixin border-bottom-radius($radius) {
+  @if $enable-rounded {
+    border-bottom-right-radius: $radius;
+    border-bottom-left-radius: $radius;
+  }
+}
+
+@mixin border-left-radius($radius) {
+  @if $enable-rounded {
+    border-top-left-radius: $radius;
+    border-bottom-left-radius: $radius;
+  }
+}
+
+@mixin box-shadow($shadow...) {
+  @if $enable-shadows {
+    box-shadow: $shadow;
+  }
+}
+
+// Minimum breakpoint width. Null for the smallest (first) breakpoint.
+//
+//    >> breakpoint-min(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    576px
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+// Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
+// Makes the @content apply to the given breakpoint and wider.
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin hover {
+  // TODO: re-enable along with mq4-hover-shim
+  //  @if $enable-hover-media-query {
+  //    // See Media Queries Level 4: https://drafts.csswg.org/mediaqueries/#hover
+  //    // Currently shimmed by https://github.com/twbs/mq4-hover-shim
+  //    @media (hover: hover) {
+  //      &:hover { @content }
+  //    }
+  //  }
+  //  @else {
+  &:hover { @content; }
+  //  }
+}
+
+
+@mixin hover-focus {
+  @if $enable-hover-media-query {
+    &:focus {
+      @content;
+    }
+    @include hover { @content; }
+  } @else {
+    &:focus,
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@-webkit-keyframes dialog-slide-in {
+  0% {
+    transform: translate(0, -25%);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes dialog-slide-in {
+  0% {
+    transform: translate(0, -25%);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@-webkit-keyframes dialog-slide-out {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(0, -25%);
+  }
+}
+
+@keyframes dialog-slide-out {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(0, -25%);
+  }
+}
+
+@-webkit-keyframes backdrop-fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: $modal-backdrop-opacity;
+  }
+}
+
+@keyframes backdrop-fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: $modal-backdrop-opacity;
+  }
+}
+
+@-webkit-keyframes backdrop-fade-out {
+  0% {
+    opacity: $modal-backdrop-opacity;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes backdrop-fade-out {
+  0% {
+    opacity: $modal-backdrop-opacity;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+// Kill the scroll on the body
+.modal-open {
+  overflow: hidden;
+}
+
+// Container that the modal scrolls within
+.ind-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  overflow: hidden;
+  // Prevent Chrome on Windows from adding a focus outline. For details, see
+  // https://github.com/twbs/bootstrap/pull/10951.
+  outline: 0;
+  // We deliberately don't use `-webkit-overflow-scrolling: touch;` due to a
+  // gnarly iOS Safari bug: https://bugs.webkit.org/show_bug.cgi?id=158342
+  // See also https://github.com/twbs/bootstrap/issues/17695
+
+  .modal-open & {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+//// Shell div to position the modal with bottom padding
+.modal-dialog {
+  z-index: $zindex-modal;
+  position: relative;
+  width: auto;
+  margin: $modal-dialog-margin;
+  // allow clicks to pass through for custom click handling to close modal
+  pointer-events: none;
+
+  animation: dialog-slide-in .3s ease-out;
+
+  .ind-modal.ind-modal-closing & {
+    animation: dialog-slide-out .3s ease-in;
+    backface-visibility: hidden;
+  }
+}
+
+.modal-dialog-centered {
+  display: flex;
+  align-items: center;
+  min-height: calc(100% - (#{$modal-dialog-margin} * 2));
+}
+
+// Actual modal
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%; // Ensure `.modal-content` extends the full width of the parent `.modal-dialog`
+  // counteract the pointer-events: none; in the .modal-dialog
+  pointer-events: auto;
+  background-color: $modal-content-bg;
+  background-clip: padding-box;
+  border: $modal-content-border-width solid $modal-content-border-color;
+  @include border-radius($border-radius-lg);
+  @include box-shadow($modal-content-box-shadow-xs);
+  // Remove focus outline from opened modal
+  outline: 0;
+}
+
+// Modal background
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $zindex-modal-backdrop;
+  background-color: $modal-backdrop-bg;
+  opacity: $modal-backdrop-opacity;
+  backface-visibility: hidden;
+  height: 200%; // temporary fix for whitespace when scrolling...
+
+  animation: backdrop-fade-in .3s ease-out;
+
+  .ind-modal.ind-modal-closing & {
+    animation: backdrop-fade-out .3s ease-in;
+  }
+}
+
+// Modal header
+// Top section of the modal w/ title and dismiss
+.modal-header {
+  display: flex;
+  align-items: flex-start; // so the close btn always stays on the upper right corner
+  justify-content: space-between; // Put modal header elements (title and dismiss) on opposite ends
+  padding: $modal-header-padding;
+  border-bottom: $modal-header-border-width solid $modal-header-border-color;
+  @include border-top-radius($border-radius-lg);
+
+  .close {
+    padding: $modal-header-padding;
+    // auto on the left force icon to the right even when there is no .modal-title
+    margin: (-$modal-header-padding) (-$modal-header-padding) (-$modal-header-padding) auto;
+  }
+}
+
+// Title text within header
+.modal-title {
+  margin-bottom: 0;
+  line-height: $modal-title-line-height;
+}
+
+// Modal body
+// Where all modal content resides (sibling of .modal-header and .modal-footer)
+.modal-body {
+  position: relative;
+  // Enable `flex-grow: 1` so that the body take up as much space as possible
+  // when should there be a fixed height on `.modal-dialog`.
+  flex: 1 1 auto;
+  padding: $modal-inner-padding;
+}
+
+// Footer (for actions)
+.modal-footer {
+  display: flex;
+  align-items: center; // vertically center
+  justify-content: flex-end; // Right align buttons with flex property because text-align doesn't work on flex items
+  padding: $modal-inner-padding;
+  border-top: $modal-footer-border-width solid $modal-footer-border-color;
+
+  // Easily place margin between footer elements
+  > :not(:first-child) { margin-left: .25rem; }
+  > :not(:last-child) { margin-right: .25rem; }
+}
+
+// Measure scrollbar width for padding body during modal show/hide
+.modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll;
+}
+
+// Scale up the modal
+@include media-breakpoint-up(sm) {
+  // Automatically set modal's width for larger viewports
+  .modal-dialog {
+    max-width: $modal-md;
+    margin: $modal-dialog-margin-y-sm-up auto;
+  }
+
+  .modal-dialog-centered {
+    min-height: calc(100% - (#{$modal-dialog-margin-y-sm-up} * 2));
+  }
+
+  .modal-content {
+    @include box-shadow($modal-content-box-shadow-sm-up);
+  }
+
+  .modal-sm { max-width: $modal-sm; }
+
+}
+
+@include media-breakpoint-up(lg) {
+  .modal-lg { max-width: $modal-lg; }
+}
+
+
+.close {
+  float: right;
+  font-size: $close-font-size;
+  font-weight: $close-font-weight;
+  line-height: 1;
+  color: $close-color;
+  text-shadow: $close-text-shadow;
+  opacity: .5;
+
+  @include hover-focus {
+    color: $close-color;
+    text-decoration: none;
+    opacity: .75;
+  }
+}
+
+// Additional properties for button version
+// iOS requires the button element instead of an anchor tag.
+// If you want the anchor version, it requires `href="#"`.
+// See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
+
+// stylelint-disable property-no-vendor-prefix, selector-no-qualifying-type
+button.close {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+// stylelint-enable
