@@ -1,43 +1,23 @@
 <div>
-  <h1>Modals (Dialogs and Side Panels)</h1>
+  <h1>ind-modal demo</h1>
 
   <ul>
-    <li><button (click)="firstModal.open()">Simple Dialog</button></li>
-    <li><button (click)="secondModal.open()">Simple Side Panel</button></li>
-    <li><button (click)="thirdModal.open()">Large Side Panel</button></li>
-    <li><button [routerLink]="['modal-component']">child route modal component</button></li>
-    <li><button [routerLink]="['../', { outlets: { modal: ['modal-component'] } }]">outlet route modal component</button></li>
-    <li><button (click)="openModal()">modal component</button></li>
+    <li><button (click)="firstModal.open()">1. Simple Dialog</button></li>
+    <li><button [routerLink]="['modal-component']">2. Routed Dialog</button></li>
+    <li><button [routerLink]="['../', { outlets: { modal: ['modal-component'] } }]">3. Routed Dialog within Outlet</button></li>
+    <li><button (click)="openModal()">4. Programmatic Dialog</button></li>
   </ul>
 
   <ind-modal #firstModal>
     <ind-modal-header>
-      I am first modal
+      I am a Simple Dialog
     </ind-modal-header>
     <ind-modal-content>
-      This modal has its own header, content and footer.
+      This dialog is defined inside a template of another component.
     </ind-modal-content>
     <ind-modal-footer>
       <button (click)="firstModal.close()">okay!</button>
     </ind-modal-footer>
-  </ind-modal>
-
-  <ind-modal #secondModal type="side-panel">
-    <ind-modal-header>
-      I am first side panel
-    </ind-modal-header>
-    <ind-modal-content>
-      This is the content of the side panel
-    </ind-modal-content>
-  </ind-modal>
-
-  <ind-modal #thirdModal type="large-side-panel">
-    <ind-modal-header>
-      I am a large side panel
-    </ind-modal-header>
-    <ind-modal-content>
-      This is the content of the side panel
-    </ind-modal-content>
   </ind-modal>
 </div>
 

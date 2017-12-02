@@ -36,7 +36,7 @@ export class ModalBodyStylingHelper {
     let widthDiffs = window.innerWidth - document.body.clientWidth;
     originalBodyScrollPosition = document.body.scrollTop;
 
-    document.body.classList.add('ind-modal-open');
+    document.body.classList.add('modal-open');
 
     let scrollBarWidth = widthDiffs - (window.innerWidth - document.body.clientWidth);
     if (scrollBarWidth > 0) {
@@ -46,15 +46,13 @@ export class ModalBodyStylingHelper {
     }
 
     window.setTimeout(() => {
-      document.body.classList.add('ind-modal-open-done');
       document.body.style.top = -originalBodyScrollPosition + 'px';
     }, 700);
 
     // Return a function that restores the styles back.
     return () => {
       // do not try to remove all the classes in one line, as IE is not able to interpret it. Each class should be removed separately.
-      document.body.classList.remove('ind-modal-open');
-      document.body.classList.remove('ind-modal-open-done');
+      document.body.classList.remove('modal-open');
       document.body.classList.remove('ind-modal-padded');
 
       document.body.style.top = '';

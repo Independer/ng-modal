@@ -4,10 +4,10 @@ import { ModalComponent } from './modal.component';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html'  
+  templateUrl: './home.component.html'
 })
 export class HomeComponent {
-  constructor(private modalService: ModalService) {    
+  constructor(private modalService: ModalService) {
   }
 
   openModal() {
