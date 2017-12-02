@@ -15,26 +15,14 @@ export class ModalComponent implements Modal, OnInit, OnDestroy {
   @Input() closeOnEscape = true;
   @Input() closeOnOutsideClick = true;
   @Input() showCloseButton = true;
-  @Input() type: 'popup' | 'side-panel' | 'large-side-panel' = 'popup';
-  @Input() stickyFooter = false;
   @Input() routeBehavior = false;
 
   @Output() closed = new EventEmitter<ModalClosedEventArgs>(false);
 
   @ViewChild('modalRoot') modalRoot: ElementRef;
-  @ViewChild('header') headerElement: ElementRef;
-  @ViewChild('body') bodyElement: ElementRef;
-  @ViewChild('footer') footerElement: ElementRef;
 
   isOpened = false;
   isClosing = false;
-
-  @HostListener('window:resize')
-  onWindowResize() {
-    if (this.isOpened) {
-      this.updateBodyPosition();
-    }
-  }
 
   @HostListener('window:popstate')
   onBrowserBack() {
@@ -63,7 +51,6 @@ export class ModalComponent implements Modal, OnInit, OnDestroy {
 
     window.setTimeout(() => {
       this.modalRoot.nativeElement.focus();
-      this.updateBodyPosition();
     }, 0);
 
     ModalBodyStylingHelper.onModalOpened();
@@ -153,24 +140,6 @@ export class ModalComponent implements Modal, OnInit, OnDestroy {
     }
 
     return undefined;
-  }
-
-  private updateBodyPosition() {
-    let headerEl = this.headerElement.nativeElement;
-    let bodyEl = this.bodyElement.nativeElement;
-    let footerEl = this.footerElement.nativeElement;
-
-    // Set top offset by the header height
-    headerEl.style.height = '';
-    let headerHeight = headerEl.clientHeight + 'px';
-    headerEl.style.height = headerHeight;
-    bodyEl.style.top = headerHeight;
-
-    // Set bottom offset by the footer height
-    footerEl.style.height = '';
-    let footerHeight = footerEl.clientHeight + 'px';
-    footerEl.style.height = footerHeight;
-    bodyEl.style.bottom = footerHeight;
   }
 }
 

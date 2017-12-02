@@ -1,10 +1,6 @@
-<div #modalRoot
-     class="ind-modal"
-     [class.ind-modal-popup]="type === 'popup'"
-     [class.ind-modal-side-panel]="type === 'side-panel' || type === 'large-side-panel'"
-     [class.ind-modal-side-panel--lg]="type === 'large-side-panel'"
-     [class.ind-modal-closing]="isClosing"
-     [class.sticky-footer]="stickyFooter"
+<div class="modal"
+     #modalRoot
+     [class.modal-closing]="isClosing"
      [ngStyle]="{ display: isOpened ? 'block' : 'none' }"
      tabindex="-1"
      role="dialog"
@@ -12,18 +8,17 @@
 
   <div class="modal-backdrop" (click)="onOutsideClick()"></div>
 
-  <div class="modal-content" tabindex="0">
-    <div #header>
-      <div class="modal-header">
+  <div class="modal-dialog" tabindex="0">
+    <div class="modal-content">
+      <div #header class="modal-header">
         <ng-content select="ind-modal-header"></ng-content>
+        <div *ngIf="showCloseButton" class="close" data-dismiss="modal" [attr.aria-label]="'Close'" (click)="onCloseButtonClick()"></div>
       </div>
-      <ng-content select="ind-model-header-after"></ng-content>
+      <div #body class="modal-body">
+        <ng-content select="ind-modal-content"></ng-content>
+      </div>
+      <!--changed indentation for css reasons for :empty pseudo class to work-->
+      <div #footer class="modal-footer"><ng-content select="ind-modal-footer"></ng-content></div>
     </div>
-    <div #body class="modal-body">
-      <ng-content select="ind-modal-content"></ng-content>
-    </div>
-    <!--changed indentation for css reasons for :empty pseudo class to work-->
-    <div #footer class="modal-footer"><ng-content select="ind-modal-footer"></ng-content></div>
-    <div *ngIf="showCloseButton" class="close" data-dismiss="modal" [attr.aria-label]="'Close'" (click)="onCloseButtonClick()"></div>
   </div>
 </div>

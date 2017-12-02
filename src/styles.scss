@@ -67,7 +67,7 @@ $font-weight-semibold:      600;
 	}
 }
 
-@-webkit-keyframes ind-modal-fadeout {
+@-webkit-keyframes modal-fadeout {
   0% {
     opacity: 1;
   }
@@ -77,7 +77,7 @@ $font-weight-semibold:      600;
   }
 }
 
-@keyframes ind-modal-fadeout {
+@keyframes modal-fadeout {
   0% {
     z-index: auto;
     opacity: 1;
@@ -93,7 +93,7 @@ $font-weight-semibold:      600;
   }
 }
 
-@-webkit-keyframes ind-modal-fadein {
+@-webkit-keyframes modal-fadein {
   0% {
     opacity: 0;
   }
@@ -103,7 +103,7 @@ $font-weight-semibold:      600;
   }
 }
 
-@keyframes ind-modal-fadein {
+@keyframes modal-fadein {
   0% {
     opacity: 0;
   }
@@ -113,19 +113,7 @@ $font-weight-semibold:      600;
   }
 }
 
-@-webkit-keyframes ind-modal-rotatein {
-  0% {
-    opacity: 0;
-    transform: rotateX(-90deg);
-  }
-
-  100% {
-    opacity: 1;
-    transform: rotateX(0);
-  }
-}
-
-@keyframes ind-modal-rotatein {
+@-webkit-keyframes modal-rotatein {
   0% {
     opacity: 0;
     transform: rotateX(-90deg);
@@ -137,7 +125,19 @@ $font-weight-semibold:      600;
   }
 }
 
-@-webkit-keyframes ind-modal-rotateout {
+@keyframes modal-rotatein {
+  0% {
+    opacity: 0;
+    transform: rotateX(-90deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotateX(0);
+  }
+}
+
+@-webkit-keyframes modal-rotateout {
   0% {
     opacity: 1;
     transform: rotateX(0);
@@ -149,7 +149,7 @@ $font-weight-semibold:      600;
   }
 }
 
-@keyframes ind-modal-rotateout {
+@keyframes modal-rotateout {
   0% {
     opacity: 1;
     transform: rotateX(0);
@@ -161,7 +161,7 @@ $font-weight-semibold:      600;
   }
 }
 
-@-webkit-keyframes ind-modal-slidein {
+@-webkit-keyframes modal-slidein {
   0% {
     left: -100%;
   }
@@ -171,7 +171,7 @@ $font-weight-semibold:      600;
   }
 }
 
-@keyframes ind-modal-slidein {
+@keyframes modal-slidein {
   0% {
     left: -100%;
   }
@@ -181,7 +181,7 @@ $font-weight-semibold:      600;
   }
 }
 
-@-webkit-keyframes ind-modal-slideout {
+@-webkit-keyframes modal-slideout {
   0% {
     left: 0;
   }
@@ -191,7 +191,7 @@ $font-weight-semibold:      600;
   }
 }
 
-@keyframes ind-modal-slideout {
+@keyframes modal-slideout {
   0% {
     left: 0;
   }
@@ -202,7 +202,7 @@ $font-weight-semibold:      600;
 }
 
 @media(min-width:$screen-sm-min) {
-  @-webkit-keyframes ind-modal-slidein {
+  @-webkit-keyframes modal-slidein {
     0% {
       left: -768px;
     }
@@ -212,7 +212,7 @@ $font-weight-semibold:      600;
     }
   }
 
-  @keyframes ind-modal-slidein {
+  @keyframes modal-slidein {
     0% {
       left: -768px;
     }
@@ -222,27 +222,7 @@ $font-weight-semibold:      600;
     }
   }
 
-  @-webkit-keyframes ind-modal-slidein--lg {
-    0% {
-      left: -1130px;
-    }
-
-    100% {
-      left: 0;
-    }
-  }
-
-  @keyframes ind-modal-slidein--lg {
-    0% {
-      left: -1130px;
-    }
-
-    100% {
-      left: 0;
-    }
-  }
-
-  @-webkit-keyframes ind-modal-slideout {
+  @-webkit-keyframes modal-slideout {
     0% {
       left: 0;
     }
@@ -252,39 +232,19 @@ $font-weight-semibold:      600;
     }
   }
 
-  @keyframes ind-modal-slideout {
+  @keyframes modal-slideout {
     0% {
       left: 0;
     }
 
     100% {
       left: -768px;
-    }
-  }
-
-  @-webkit-keyframes ind-modal-slideout--lg {
-    0% {
-      left: 0;
-    }
-
-    100% {
-      left: -1130px;
-    }
-  }
-
-  @keyframes ind-modal-slideout--lg {
-    0% {
-      left: 0;
-    }
-
-    100% {
-      left: -1130px;
     }
   }
 }
 
 
-.ind-modal {
+.modal {
   position: fixed;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
@@ -293,6 +253,8 @@ $font-weight-semibold:      600;
   right: 0;
   bottom: 0;
   left: 0;
+  perspective: 1500px;
+  overflow-x: hidden;
 
   h2 {
     font-weight: 300;
@@ -308,63 +270,26 @@ $font-weight-semibold:      600;
     z-index: $zindex-modal-bg;
     backface-visibility: hidden;
     height: 200%; // temporary fix for whitespace when scrolling...
+    animation: modal-fadein 1s;
   }
 
-  .modal-content {
+  .modal-dialog {
     z-index: $zindex-modal;
     background: $white;
     backface-visibility: hidden;
     transform: translate3d(0,0,1px);
+    animation: modal-rotatein 1s;
+    color: $darkest-grey;
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 15px;
+    position: relative;
+
     &:focus {
       outline: none;
     }
-    .close {
-      text-align:center;
-      @include icon(cross, before);
-      cursor:pointer;
-      &:before {
-        font-size: 8px;
-        line-height: 20px;
-        vertical-align: text-bottom;
-      }
-    }
-
-    .modal-footer {
-      margin-top: 30px;
-
-      &:empty {
-        margin: 0;
-        padding: 0;
-      }
-    }
-  }
-
-  &.ind-modal-closing {
-    .ind-modal-popup {
-      .modal-backdrop {
-        backface-visibility: hidden;
-        animation: ind-modal-fadeout 1s;
-      }
-    }
-  }
-
-  &.ind-modal-popup {
-    perspective: 1500px;
-    overflow-x: hidden;
-
-    .modal-backdrop {
-      background: $backdrop;
-      animation: ind-modal-fadein 1s;
-    }    
 
     .modal-content {
-      animation: ind-modal-rotatein 1s;
-      color: $darkest-grey;
-      margin: 0 auto;
-      max-width: 100%;
-      padding: 15px;
-      position: relative;      
-
       .modal-header {
         font-size: $font-size-h2;
         line-height: $headings-line-height;
@@ -373,241 +298,73 @@ $font-weight-semibold:      600;
         margin-bottom: 20px;
         border-bottom: 2px solid $border-color;
         font-weight: $font-weight-semibold;
-        padding-right:50px;
-      
+        display: flex;
+
         span {
           padding-right: 40px;
         }
-      }
 
-      .modal-body {
-        padding-top: 30px;
-      }
-    }
-  
-    &.ind-modal-closing {
-      .modal-backdrop {
-        animation: ind-modal-fadeout 0.5s;
-        backface-visibility: hidden;        
-      }
+        ind-modal-header {
+          flex: 1;
+        }
 
-      .modal-content {
-        animation: ind-modal-rotateout 1s;
-        backface-visibility: hidden;       
-      }
-    }
-
-    .close {
-      cursor: pointer;
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      width: 38px;
-      height: 38px;
-      color: $border-grey;
-      @include icon(close-button);
-      &:before {
-        font-size:36px;
-        line-height:1em;
-      }
-    }
-
-    @media(max-width:$screen-sm-min) { 
-      .modal-content {
-        animation: ind-modal-slidein 1s;        
-      }
-    
-      &.ind-modal-closing {
-        .modal-content {
-          animation: ind-modal-slideout 1s;
+        .close {
+          text-align:center;
+          @include icon(cross, before);
+          cursor: pointer;
+          color: $border-grey;
+          @include icon(close-button);
         }
       }
-    }
-    
-    @media(min-width:$screen-sm-min) {
-      padding-bottom: 160px;
-      padding-top: 160px;
 
-      .modal-content {
-        padding: 30px 30px;
-        width: 666px;
-      }
+      .modal-footer {
+        margin-top: 30px;
 
-      .close {
-        right: 30px;
-        top: 20px;
-      }
-    }
-
-    @media(max-width:$screen-xs-max){
-      &.sticky-footer {
-        .modal-content {
-          position: absolute;
-          top: 0;
-          bottom: 0;
+        &:empty {
+          margin: 0;
           padding: 0;
-
-          .modal-header {
-            padding: 5px 50px 15px 0;
-            margin: 0 15px;
-          }
-          .modal-body {
-            padding: 30px 15px;
-            position: absolute;
-            left: 0;
-            right: 0;
-            overflow-y: auto;
-          }
-          .modal-footer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: $grey;
-            padding: 0 15px;
-          }
-        }       
+        }
       }
     }
   }
 
-  &.ind-modal-side-panel {
-    overflow-x: hidden;
-    user-select: auto !important;
-    
+  &.modal-closing {
     .modal-backdrop {
-      background: $backdrop;
-      animation: ind-modal-fadein 0.7s;
+      animation: modal-fadeout 0.5s;
+      backface-visibility: hidden;
     }
-  
-    .modal-content {
-      animation: ind-modal-slidein 0.7s;
-      color: $darkest-grey;
-      position: absolute;
-      width: 768px;
-      max-width: 100%;
-      top: 0;
-      bottom: 0;
-      border-right: 2px solid $dark-purple;
-  
-      .modal-header {
-        font-size: $font-size-h2;
-        line-height: $headings-line-height;
-        color: $white;
-        font-weight: $font-weight-semibold;
-        padding: 15px 65px 15px 15px;
-        background-color: $purple;
-        border-bottom: 3px solid rgba(0,0,0,.07);
-        h1 {
-          color: $white;
-          margin: 0;
-        }
-      }
-      
-      .modal-body {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        overflow-y: auto;
-        padding: 15px;
-      }
-  
-      .modal-footer {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 15px;
-      }
-    }
-    
-    .close {
-      position: absolute;
-      top: 14px;
-      right: 15px;
-      width: 30px;
-      height: 30px;
-      line-height:20px;
-      cursor: pointer;
-      //ADDED//
-      background-color: darken($purple, 20%);
-      border-radius: 50%;
-      text-align:center;
-      @include icon(cross, after);
-  
-      &:after {
-        color: $white;
-        font-size: 12px;
-        line-height: 20px;
-        position: relative;
-        top: 5px;
-      }
-  
-      &:before {
-        content: none;
-      }
-  
-      &:hover:before,
-      &:active:before {
-        color: $darker-grey;
-      }
-    }
-  
-    &.ind-modal-closing {
-      .modal-backdrop {
-        backface-visibility: hidden;
-        animation: ind-modal-fadeout 0.5s;
-      }
-      
-      .modal-content {
-        animation: ind-modal-slideout .5s;
-      }
-    }
-  
-    @media(min-width:$screen-sm-min) {
-      .modal-content {
-        .modal-header {
-          font-size: $font-size-h2;
-          padding: 20px 80px 20px 50px;
-        }    
-        
-        .modal-body {
-          padding: 30px 50px;
-        }
-  
-        .modal-footer {
-          padding: 20px 50px 20px 50px;
-        }
-      }
-  
-      .close {
-        right: 22px;
-        top: 24px;
-      }    
-    }
-  
-    @media(min-width:$screen-md-min) {
-      &.ind-modal-closing {
-        .modal-content {
-          animation: ind-modal-slideout--lg .5s;
-        }
-      }
 
-      &.ind-modal-side-panel--lg {
-        .modal-content {
-          width: 90%;
-          max-width: 1130px;
-          animation: ind-modal-slidein--lg 0.7s;
-        }
+    .modal-dialog {
+      animation: modal-rotateout 1s;
+      backface-visibility: hidden;
+    }
+  }
+
+  @media(max-width:$screen-sm-min) {
+    .modal-dialog {
+      animation: modal-slidein 1s;
+    }
+
+    &.modal-closing {
+      .modal-dialog {
+        animation: modal-slideout 1s;
       }
     }
-  
-    @media(min-width:$screen-lg-min) {
-      .modal-content {       
+  }
+
+  @media(min-width:$screen-sm-min) {
+    padding-bottom: 160px;
+    padding-top: 160px;
+
+    .modal-dialog {
+      padding: 30px 30px;
+      width: 666px;
+
+      .modal-content {
         .modal-header {
-          font-size: $font-size-h2;
+          .close {
+            top: -12px;
+          }
         }
       }
     }
@@ -615,15 +372,7 @@ $font-weight-semibold:      600;
 }
 
 body {
-  &.ind-modal-open {
+  &.modal-open {
     overflow: hidden;
-  }
-
-  //This fixes an issue with mobile (safari/chrome on IOS), which scrolls the site behind the dialog when scrolling beyond the scroll point
-  @media(max-width:$screen-xs-max) {
-    &.ind-modal-open-done {
-      position: fixed;
-      left: 0;
-    }
   }
 }
