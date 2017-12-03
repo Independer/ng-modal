@@ -15,9 +15,6 @@ $gray-800:                          #343a40 !default;
 $gray-900:                          #212529 !default;
 $black:                             #000 !default;
 
-$zindex-modal-backdrop:             1040 !default;
-$zindex-modal:                      1050 !default;
-
 $border-width:                      1px !default;
 $line-height-base:                  1.5 !default;
 
@@ -48,9 +45,6 @@ $font-size-sm:                      ($font-size-base * .875) !default;
 $font-weight-light:                 300 !default;
 $font-weight-normal:                400 !default;
 $font-weight-bold:                  700 !default;
-
-$zindex-modal-backdrop:             1040 !default;
-$zindex-modal:                      1050 !default;
 
 $modal-inner-padding:               1rem !default;
 
@@ -297,18 +291,18 @@ $close-text-shadow:                 0 1px 0 $white !default;
 
 //// Shell div to position the modal with bottom padding
 .modal-dialog {
-  z-index: $zindex-modal;
   position: relative;
   width: auto;
   margin: $modal-dialog-margin;
   // allow clicks to pass through for custom click handling to close modal
   pointer-events: none;
 
-  animation: dialog-slide-in .3s ease-out;
-
-  .modal-closing & {
-    animation: dialog-slide-out .3s ease-in;
-    backface-visibility: hidden;
+  .modal.fade & {
+    @include transition($modal-transition);
+    transform: translate(0, -25%);
+  }
+  .modal.show & {
+    transform: translate(0, 0);
   }
 }
 
@@ -336,18 +330,13 @@ $close-text-shadow:                 0 1px 0 $white !default;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: $zindex-modal-backdrop;
   background-color: $modal-backdrop-bg;
   opacity: $modal-backdrop-opacity;
   backface-visibility: hidden;
   height: 200%; // temporary fix for whitespace when scrolling...
 
-  animation: backdrop-fade-in .3s ease-out;
-
-  .modal-closing & {
-    animation: backdrop-fade-out .3s ease-in;
-    backface-visibility: hidden;
-  }
+  &.fade { opacity: 0; }
+  &.show { opacity: $modal-backdrop-opacity; }
 }
 
 // Modal header
