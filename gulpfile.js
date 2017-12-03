@@ -12,6 +12,8 @@ const gulp = require('gulp'),
   autoprefixer = require('gulp-autoprefixer'),
   es = require('event-stream');
 
+const { readdirSync } = require('fs')
+
 const rootFolder = path.join(__dirname);
 const srcFolder = path.join(rootFolder, 'src');
 const themesSrcFolder = path.join(srcFolder, 'themes');
@@ -19,6 +21,8 @@ const tmpFolder = path.join(rootFolder, '.tmp');
 const buildFolder = path.join(rootFolder, 'build');
 const distFolder = path.join(rootFolder, 'dist');
 const themesDistFolder = path.join(distFolder, 'themes');
+
+const themes = readdirSync(themesSrcFolder);
 
 /**
  * 1. Delete /dist folder

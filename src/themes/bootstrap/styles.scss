@@ -274,7 +274,7 @@ $close-text-shadow:                 0 1px 0 $white !default;
 }
 
 // Container that the modal scrolls within
-.ind-modal {
+.modal {
   position: fixed;
   top: 0;
   right: 0;
@@ -293,6 +293,18 @@ $close-text-shadow:                 0 1px 0 $white !default;
     overflow-x: hidden;
     overflow-y: auto;
   }
+
+  &.modal-closing {
+    .modal-backdrop {
+      animation: backdrop-fade-out .3s ease-in;
+      backface-visibility: hidden;
+    }
+
+    .modal-dialog {
+      animation: dialog-slide-out .3s ease-in;
+      backface-visibility: hidden;
+    }
+  }
 }
 
 //// Shell div to position the modal with bottom padding
@@ -305,11 +317,6 @@ $close-text-shadow:                 0 1px 0 $white !default;
   pointer-events: none;
 
   animation: dialog-slide-in .3s ease-out;
-
-  .ind-modal.ind-modal-closing & {
-    animation: dialog-slide-out .3s ease-in;
-    backface-visibility: hidden;
-  }
 }
 
 .modal-dialog-centered {
@@ -349,10 +356,6 @@ $close-text-shadow:                 0 1px 0 $white !default;
   height: 200%; // temporary fix for whitespace when scrolling...
 
   animation: backdrop-fade-in .3s ease-out;
-
-  .ind-modal.ind-modal-closing & {
-    animation: backdrop-fade-out .3s ease-in;
-  }
 }
 
 // Modal header
@@ -443,6 +446,9 @@ $close-text-shadow:                 0 1px 0 $white !default;
   color: $close-color;
   text-shadow: $close-text-shadow;
   opacity: .5;
+  &:before {
+    content: '×';
+  }
 
   @include hover-focus {
     color: $close-color;

@@ -4,7 +4,7 @@
   <div class="modal-content">
     <div #header class="modal-header">
       <ng-content select="ind-modal-header"></ng-content>
-      <div *ngIf="showCloseButton" class="close" data-dismiss="modal" [attr.aria-label]="'Close'" (click)="onCloseButtonClick()"></div>
+      <button *ngIf="showCloseButton" class="close" data-dismiss="modal" [attr.aria-label]="'Close'" (click)="onCloseButtonClick()"></button>
     </div>
     <div #body class="modal-body">
       <ng-content select="ind-modal-content"></ng-content>
