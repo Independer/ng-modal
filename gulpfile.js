@@ -1,5 +1,5 @@
 /* eslint-disable */
-var gulp = require('gulp'),
+const gulp = require('gulp'),
   path = require('path'),
   ngc = require('@angular/compiler-cli/src/main').main,
   rollup = require('gulp-rollup'),
@@ -9,13 +9,16 @@ var gulp = require('gulp'),
   inlineResources = require('./tools/gulp/inline-resources'),
   sass = require('gulp-sass'),
   inline_base64 = require('gulp-inline-base64'),
-  autoprefixer = require('gulp-autoprefixer');
+  autoprefixer = require('gulp-autoprefixer'),
+  es = require('event-stream');
 
 const rootFolder = path.join(__dirname);
 const srcFolder = path.join(rootFolder, 'src');
+const themesSrcFolder = path.join(srcFolder, 'themes');
 const tmpFolder = path.join(rootFolder, '.tmp');
 const buildFolder = path.join(rootFolder, 'build');
 const distFolder = path.join(rootFolder, 'dist');
+const themesDistFolder = path.join(distFolder, 'themes');
 
 /**
  * 1. Delete /dist folder
@@ -160,26 +163,30 @@ gulp.task('rollup:umd', function () {
 /**
  * 7. Compile SASS
  */
-gulp.task('compile:sass', function() {
-  return gulp.src([`${srcFolder}/**/*.scss`])
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest(distFolder))
-    .pipe(inline_base64({
-      baseDir: srcFolder        
-    }))
-    .pipe(autoprefixer("last 2 version", "> 1%", {
-      cascade: true
-    }))
-    .pipe(gulp.dest(distFolder));
+gulp.task('compile:themes', function() {
+  return es.merge(themes.map(theme => {
+    return gulp.src([`${themesSrcFolder}/${theme}/*.scss`])
+      .pipe(sass().on('error', sass.logError))
+      .pipe(inline_base64({
+        baseDir: `${themesSrcFolder}/${theme}`
+      }))
+      .pipe(autoprefixer("last 2 version", "> 1%", {
+        cascade: true
+      }))
+      .pipe(gulp.dest(`${themesDistFolder}/${theme}`));
+  }));
 });
 
 /**
  * 8. Copy *.scss files to the /dist so that the application developers
  * could take them and customize the styles easily. 
  */
-gulp.task('copy:sass', function() {
-  return gulp.src([`${srcFolder}/**/*.scss`, `${srcFolder}/assets/**/*.*`], {base: srcFolder})
-    .pipe(gulp.dest(distFolder));
+gulp.task('copy:themes-src', function() {
+  return es.merge(themes.map(theme => {
+    return gulp.src([`${themesSrcFolder}/${theme}/*.scss`, `${themesSrcFolder}/${theme}/assets/**/*.*`], {base: `${themesSrcFolder}/${theme}`})
+      .pipe(gulp.dest(`${themesDistFolder}/${theme}/src`));
+  }));
+
 });
 
 /**
@@ -230,8 +237,8 @@ gulp.task('compile', function () {
     'ngc',
     'rollup:fesm',
     'rollup:umd',
-    'compile:sass',
-    'copy:sass',
+    'compile:themes',
+    'copy:themes-src',
     'copy:build',
     'copy:manifest',
     'copy:readme',
