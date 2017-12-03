@@ -68,49 +68,23 @@ $font-weight-semibold:      600;
 }
 
 @-webkit-keyframes modal-fadeout {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
+  0% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 @keyframes modal-fadeout {
-  0% {
-    z-index: auto;
-    opacity: 1;
-  }
-
-  99% {
-    opacity: 0;
-  }
-
-  100% {
-    z-index: -1;
-    opacity: 0;
-  }
+  0% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 @-webkit-keyframes modal-fadein {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 @keyframes modal-fadein {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 @-webkit-keyframes modal-rotatein {
@@ -118,7 +92,6 @@ $font-weight-semibold:      600;
     opacity: 0;
     transform: rotateX(-90deg);
   }
-
   100% {
     opacity: 1;
     transform: rotateX(0);
@@ -130,7 +103,6 @@ $font-weight-semibold:      600;
     opacity: 0;
     transform: rotateX(-90deg);
   }
-
   100% {
     opacity: 1;
     transform: rotateX(0);
@@ -142,7 +114,6 @@ $font-weight-semibold:      600;
     opacity: 1;
     transform: rotateX(0);
   }
-
   100% {
     opacity: 0;
     transform: rotateX(90deg);
@@ -154,7 +125,6 @@ $font-weight-semibold:      600;
     opacity: 1;
     transform: rotateX(0);
   }
-
   100% {
     opacity: 0;
     transform: rotateX(90deg);
@@ -162,84 +132,44 @@ $font-weight-semibold:      600;
 }
 
 @-webkit-keyframes modal-slidein {
-  0% {
-    left: -100%;
-  }
-
-  100% {
-    left: 0;
-  }
+  0% { left: -100%; }
+  100% { left: 0; }
 }
 
 @keyframes modal-slidein {
-  0% {
-    left: -100%;
-  }
-
-  100% {
-    left: 0;
-  }
+  0% { left: -100%; }
+  100% { left: 0; }
 }
 
 @-webkit-keyframes modal-slideout {
-  0% {
-    left: 0;
-  }
-
-  100% {
-    left: -100%;
-  }
+  0% { left: 0; }
+  100% { left: -100%; }
 }
 
 @keyframes modal-slideout {
-  0% {
-    left: 0;
-  }
-
-  100% {
-    left: -100%;
-  }
+  0% { left: 0; }
+  100% { left: -100%; }
 }
 
 @media(min-width:$screen-sm-min) {
   @-webkit-keyframes modal-slidein {
-    0% {
-      left: -768px;
-    }
-
-    100% {
-      left: 0;
-    }
+    0% { left: -768px; }
+    100% { left: 0; }
   }
 
   @keyframes modal-slidein {
-    0% {
-      left: -768px;
-    }
-
-    100% {
-      left: 0;
-    }
+    0% { left: -768px; }
+    100% { left: 0; }
   }
 
   @-webkit-keyframes modal-slideout {
-    0% {
-      left: 0;
-    }
-
-    100% {
-      left: -768px;
-    }
+    0% { left: 0; }
+    100% { left: -768px; }
   }
 
   @keyframes modal-slideout {
-    0% {
-      left: 0;
-    }
-
-    100% {
-      left: -768px;
-    }
+    0% { left: 0; }
+    100% { left: -768px; }
   }
 }
 
@@ -248,7 +178,7 @@ $font-weight-semibold:      600;
   position: fixed;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-  z-index: $zindex-modal;
+  z-index: 1050;
   top: 0;
   right: 0;
   bottom: 0;
@@ -256,123 +186,112 @@ $font-weight-semibold:      600;
   perspective: 1500px;
   overflow-x: hidden;
 
-  .modal-backdrop {
-    position: fixed;
-    background: $backdrop;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: $zindex-modal-bg;
+  @media(min-width:$screen-sm-min) {
+    padding-bottom: 160px;
+    padding-top: 160px;
+  }
+}
+
+.modal-dialog {
+  z-index: $zindex-modal;
+  background: $white;
+  backface-visibility: hidden;
+  transform: translate3d(0,0,1px);
+  animation: modal-rotatein 1s;
+  color: $darkest-grey;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 15px;
+  position: relative;
+
+  .modal-closing & {
+    animation: modal-rotateout .5s;
     backface-visibility: hidden;
-    height: 200%; // temporary fix for whitespace when scrolling...
-    animation: modal-fadein 1s;
   }
 
-  .modal-dialog {
-    z-index: $zindex-modal;
-    background: $white;
-    backface-visibility: hidden;
-    transform: translate3d(0,0,1px);
-    animation: modal-rotatein 1s;
-    color: $darkest-grey;
-    margin: 0 auto;
-    max-width: 100%;
-    padding: 15px;
-    position: relative;
-
-    &:focus {
-      outline: none;
-    }
-
-    .modal-content {
-      .modal-header {
-        font-size: $font-size-h2;
-        line-height: $headings-line-height;
-        color: $headings-color;
-        padding-bottom: 13px;
-        margin-bottom: 20px;
-        border-bottom: 2px solid $border-color;
-        font-weight: $font-weight-semibold;
-        display: flex;
-
-        ind-modal-header {
-          flex: 1;
-        }
-
-        h1, h2, h3, h4, h5 {
-          margin: 0;
-        }
-
-        .close {
-          text-align:center;
-          @include icon(cross, before);
-          cursor: pointer;
-          color: $border-grey;
-          @include icon(close-button);
-        }
-
-        button.close {
-          padding: 0;
-          background-color: transparent;
-          border: 0;
-          outline: none;
-          -webkit-appearance: none;
-          font-size: $font-size-h2;
-        }
-      }
-
-      .modal-footer {
-        margin-top: 30px;
-
-        &:empty {
-          margin: 0;
-          padding: 0;
-        }
-      }
-    }
-  }
-
-  &.modal-closing {
-    .modal-backdrop {
-      animation: modal-fadeout 0.5s;
-      backface-visibility: hidden;
-    }
-
-    .modal-dialog {
-      animation: modal-rotateout 1s;
-      backface-visibility: hidden;
-    }
+  &:focus {
+    outline: none;
   }
 
   @media(max-width:$screen-sm-min) {
-    .modal-dialog {
-      animation: modal-slidein 1s;
-    }
+    animation: modal-slidein 1s;
 
-    &.modal-closing {
-      .modal-dialog {
-        animation: modal-slideout 1s;
-      }
+    modal-closing & {
+      animation: modal-slideout 1s;
     }
   }
 
   @media(min-width:$screen-sm-min) {
-    padding-bottom: 160px;
-    padding-top: 160px;
+    padding: 30px 30px;
+    width: 666px;
+  }
+}
 
-    .modal-dialog {
-      padding: 30px 30px;
-      width: 666px;
+.modal-content {
 
-      .modal-content {
-        .modal-header {
-          .close {
-            top: -12px;
-          }
-        }
-      }
+}
+
+.modal-header {
+  font-size: $font-size-h2;
+  line-height: $headings-line-height;
+  color: $headings-color;
+  padding-bottom: 13px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid $border-color;
+  font-weight: $font-weight-semibold;
+  display: flex;
+
+  ind-modal-header {
+    flex: 1;
+  }
+
+  h1, h2, h3, h4, h5 {
+    margin: 0;
+  }
+
+  .close {
+    text-align:center;
+    @include icon(cross, before);
+    cursor: pointer;
+    color: $border-grey;
+    @include icon(close-button);
+
+    @media(min-width:$screen-sm-min) {
+      top: -12px;
     }
+  }
+
+  button.close {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+    -webkit-appearance: none;
+    font-size: $font-size-h2;
+  }
+}
+
+.modal-footer {
+  margin-top: 30px;
+
+  &:empty {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.modal-backdrop {
+  position: fixed;
+  background: $backdrop;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  animation: modal-fadein 1s;
+
+  &.modal-closing {
+    animation: modal-fadeout .5s;
   }
 }
 

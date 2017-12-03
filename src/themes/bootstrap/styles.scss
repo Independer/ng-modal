@@ -46,6 +46,10 @@ $font-weight-light:                 300 !default;
 $font-weight-normal:                400 !default;
 $font-weight-bold:                  700 !default;
 
+$transition-base:                   all .2s ease-in-out !default;
+$transition-fade:                   opacity .15s linear !default;
+$transition-collapse:               height .35s ease !default;
+
 $modal-inner-padding:               1rem !default;
 
 $modal-dialog-margin:               .5rem !default;
@@ -70,7 +74,7 @@ $modal-lg:                          800px !default;
 $modal-md:                          500px !default;
 $modal-sm:                          300px !default;
 
-$modal-transition:                  transform .3s ease-out !default;
+$modal-transition:                  transform .15s ease-out !default;
 
 $close-font-size:                   $font-size-base * 1.5 !default;
 $close-font-weight:                 $font-weight-bold !default;
@@ -262,6 +266,15 @@ $close-text-shadow:                 0 1px 0 $white !default;
   }
 }
 
+.fade {
+  opacity: 0;
+  @include transition($transition-fade);
+
+  &.show {
+    opacity: 1;
+  }
+}
+
 // Kill the scroll on the body
 .modal-open {
   overflow: hidden;
@@ -270,6 +283,7 @@ $close-text-shadow:                 0 1px 0 $white !default;
 // Container that the modal scrolls within
 .modal {
   position: fixed;
+  z-index: 1050;
   top: 0;
   right: 0;
   bottom: 0;
@@ -325,6 +339,7 @@ $close-text-shadow:                 0 1px 0 $white !default;
 
 // Modal background
 .modal-backdrop {
+  z-index: 1040;
   position: fixed;
   top: 0;
   right: 0;
@@ -335,8 +350,9 @@ $close-text-shadow:                 0 1px 0 $white !default;
   backface-visibility: hidden;
   height: 200%; // temporary fix for whitespace when scrolling...
 
-  &.fade { opacity: 0; }
-  &.show { opacity: $modal-backdrop-opacity; }
+  &.fade { opacity: 0;
+    &.show { opacity: $modal-backdrop-opacity; }
+  }
 }
 
 // Modal header

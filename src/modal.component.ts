@@ -1,6 +1,6 @@
 import {
-    Component, Input, Output, EventEmitter, ElementRef, OnDestroy, HostListener,
-    forwardRef, OnInit, HostBinding
+  Component, Input, Output, EventEmitter, ElementRef, OnDestroy, HostListener,
+  forwardRef, OnInit, ViewChild, HostBinding
 } from '@angular/core';
 import { ModalBodyStylingHelper } from './modal-body-styling.helper';
 import { Modal, ModalClosedEventArgs, ModalCloseReason } from './modal';
@@ -19,20 +19,26 @@ export class ModalComponent implements Modal, OnInit, OnDestroy {
 
   @Output() closed = new EventEmitter<ModalClosedEventArgs>(false);
 
-  @HostBinding('class.modal') get classModal() { return true; }
-  @HostBinding('class.modal-closing') get classModalClosing() { return this.isClosing; }
-  @HostBinding('style.display') get styleDisplay() { return this.isOpening || this.isOpened ? 'block' : 'none'; }
-  @HostBinding('attr.tabindex') attrTabIndex = -1;
-  @HostBinding('attr.role') attrRole = 'dialog';
-  @HostBinding('attr.aria-hidden') get attrAreaHidden() { return !this.isOpened; }
-  @HostBinding('class.fade') get classFade() { return this.isOpening || this.isOpened; }
-  @HostBinding('class.show') get classShow() { return this.isOpened && !this.isClosing; }
+  @ViewChild('modalRoot') modalRoot: ElementRef;
+  @ViewChild('backdrop') backdrop: ElementRef;
+
+  get classModalClosing() { return this.isClosing; }
+
+  @HostBinding('style.display')
+  get styleDisplay() { return this.isOpening || this.isOpened ? 'block' : 'none'; }
+
+  @HostBinding('attr.hidden')
+  @HostBinding('attr.area-hidden')
+  get attrHidden() { return !this.isOpened && !this.isOpening ? '' : undefined; }
+
+  get classFade() { return this.isOpening || this.isOpened; }
+  get classShow() { return this.isOpened && !this.isClosing; }
 
   private isClosing = false;
   private isOpening = false;
   private isOpened = false;
 
-  constructor(private modalRoot: ElementRef) {
+  constructor() {
   }
 
   @HostListener('window:popstate')
@@ -60,7 +66,7 @@ export class ModalComponent implements Modal, OnInit, OnDestroy {
     this.isClosing = false;
     this.isOpening = true;
 
-    window.setTimeout(() => {
+    setTimeout(() => {
       this.isOpening = false;
       this.isOpened = true;
       this.modalRoot.nativeElement.focus();
@@ -73,10 +79,24 @@ export class ModalComponent implements Modal, OnInit, OnDestroy {
     this.doClose(ModalCloseReason.Programmatically, result);
   }
 
-  onOutsideClick() {
+  onBackdropClick() {
     if (this.closeOnOutsideClick) {
       this.doClose(ModalCloseReason.OutsideClick);
     }
+  }
+
+  onModalRootClick(event: Event) {
+    if (!this.closeOnOutsideClick) {
+      return;
+    }
+
+    if (event.target !== event.currentTarget) {
+      // Only close if user clicked anywhere on the root element and
+      // not inside the dialog content.
+      return;
+    }
+
+    this.doClose(ModalCloseReason.OutsideClick);
   }
 
   @HostListener('keydown.esc')
@@ -128,13 +148,14 @@ export class ModalComponent implements Modal, OnInit, OnDestroy {
     if (animationEventName !== undefined || transitionEventName !== undefined) {
       let done = false;
 
-      let runOnce = (e: any) => {
+      let runOnce = () => {
         if (!done) {
           callback();
           done = true;
         }
 
-        element.removeEventListener(e.type, runOnce);
+        element.removeEventListener(animationEventName, runOnce);
+        element.removeEventListener(transitionEventName, runOnce);
       };
 
       if (animationEventName !== undefined) {

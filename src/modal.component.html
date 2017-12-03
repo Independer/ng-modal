@@ -1,16 +1,34 @@
-<div class="modal-backdrop" style="z-index: 1040" [ngClass]="{ show: classShow, fade: classFade }" (click)="onOutsideClick()"></div>
+<div #modalRoot
+     class="modal fade"
+     [ngClass]="{ 'modal-closing': classModalClosing, 'show': classShow }"
+     [style.display]="styleDisplay"
+     [attr.hidden]="attrHidden"
+     [attr.aria-hidden]="attrHidden"
+     tabindex="-1"
+     role="dialog"
+     (click)="onModalRootClick($event)">
 
-<div class="modal-dialog" style="z-index: 1050" tabindex="0">
-  <div class="modal-content">
-    <div #header class="modal-header">
-      <ng-content select="ind-modal-header"></ng-content>
-      <button *ngIf="showCloseButton" class="close" data-dismiss="modal" [attr.aria-label]="'Close'" (click)="onCloseButtonClick()"></button>
-    </div>
-    <div #body class="modal-body">
-      <ng-content select="ind-modal-content"></ng-content>
-    </div>
-    <div #footer class="modal-footer">
-      <ng-content select="ind-modal-footer"></ng-content>
+  <div class="modal-dialog" tabindex="0">
+    <div class="modal-content">
+      <div #header class="modal-header">
+        <ng-content select="ind-modal-header"></ng-content>
+        <button *ngIf="showCloseButton" class="close" data-dismiss="modal" [attr.aria-label]="'Close'" (click)="onCloseButtonClick()"></button>
+      </div>
+      <div #body class="modal-body">
+        <ng-content select="ind-modal-content"></ng-content>
+      </div>
+      <div #footer class="modal-footer">
+        <ng-content select="ind-modal-footer"></ng-content>
+      </div>
     </div>
   </div>
+</div>
+
+<div #backdrop
+     class="modal-backdrop fade"
+     [ngClass]="{ 'modal-closing': classModalClosing, 'show': classShow }"
+     [attr.hidden]="attrHidden"
+     [attr.aria-hidden]="attrHidden"
+     [style.display]="styleDisplay"
+     (click)="onBackdropClick()">
 </div>
