@@ -293,18 +293,6 @@ $close-text-shadow:                 0 1px 0 $white !default;
     overflow-x: hidden;
     overflow-y: auto;
   }
-
-  &.modal-closing {
-    .modal-backdrop {
-      animation: backdrop-fade-out .3s ease-in;
-      backface-visibility: hidden;
-    }
-
-    .modal-dialog {
-      animation: dialog-slide-out .3s ease-in;
-      backface-visibility: hidden;
-    }
-  }
 }
 
 //// Shell div to position the modal with bottom padding
@@ -317,12 +305,11 @@ $close-text-shadow:                 0 1px 0 $white !default;
   pointer-events: none;
 
   animation: dialog-slide-in .3s ease-out;
-}
 
-.modal-dialog-centered {
-  display: flex;
-  align-items: center;
-  min-height: calc(100% - (#{$modal-dialog-margin} * 2));
+  .modal-closing & {
+    animation: dialog-slide-out .3s ease-in;
+    backface-visibility: hidden;
+  }
 }
 
 // Actual modal
@@ -356,6 +343,11 @@ $close-text-shadow:                 0 1px 0 $white !default;
   height: 200%; // temporary fix for whitespace when scrolling...
 
   animation: backdrop-fade-in .3s ease-out;
+
+  .modal-closing & {
+    animation: backdrop-fade-out .3s ease-in;
+    backface-visibility: hidden;
+  }
 }
 
 // Modal header
