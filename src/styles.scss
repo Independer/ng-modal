@@ -256,10 +256,6 @@ $font-weight-semibold:      600;
   perspective: 1500px;
   overflow-x: hidden;
 
-  h2 {
-    font-weight: 300;
-  }
-
   .modal-backdrop {
     position: fixed;
     background: $backdrop;
@@ -299,10 +295,6 @@ $font-weight-semibold:      600;
         border-bottom: 2px solid $border-color;
         font-weight: $font-weight-semibold;
         display: flex;
-
-        span {
-          padding-right: 40px;
-        }
 
         ind-modal-header {
           flex: 1;

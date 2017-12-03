@@ -1,6 +1,6 @@
 import {
-  Component, Input, Output, EventEmitter, ElementRef, ViewChild, OnDestroy, HostListener,
-  forwardRef, OnInit
+    Component, Input, Output, EventEmitter, ElementRef, OnDestroy, HostListener,
+    forwardRef, OnInit, HostBinding
 } from '@angular/core';
 import { ModalBodyStylingHelper } from './modal-body-styling.helper';
 import { Modal, ModalClosedEventArgs, ModalCloseReason } from './modal';
@@ -19,10 +19,16 @@ export class ModalComponent implements Modal, OnInit, OnDestroy {
 
   @Output() closed = new EventEmitter<ModalClosedEventArgs>(false);
 
-  @ViewChild('modalRoot') modalRoot: ElementRef;
+  @HostBinding('class.modal') addModalClass = true;
+  @HostBinding('class.modal-closing') isClosing = false;
+  @HostBinding('style.display') get hostDisplay() { return this.isOpened ? 'block' : 'none'; }
+  @HostBinding('attr.tabindex') tabIndex = -1;
+  @HostBinding('attr.role') role = 'dialog';
 
   isOpened = false;
-  isClosing = false;
+
+  constructor(private modalRoot: ElementRef) {
+  }
 
   @HostListener('window:popstate')
   onBrowserBack() {
@@ -66,6 +72,7 @@ export class ModalComponent implements Modal, OnInit, OnDestroy {
     }
   }
 
+  @HostListener('keydown.esc')
   onEscapePressed() {
     if (this.closeOnEscape) {
       this.doClose(ModalCloseReason.Escape);
