@@ -1,6 +1,6 @@
-<div class="modal-backdrop" (click)="onOutsideClick()"></div>
+<div class="modal-backdrop" style="z-index: 1040" [ngClass]="{ show: classShow, fade: classFade }" (click)="onOutsideClick()"></div>
 
-<div class="modal-dialog" tabindex="0">
+<div class="modal-dialog" style="z-index: 1050" tabindex="0">
   <div class="modal-content">
     <div #header class="modal-header">
       <ng-content select="ind-modal-header"></ng-content>

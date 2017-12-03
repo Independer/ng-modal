@@ -19,13 +19,18 @@ export class ModalComponent implements Modal, OnInit, OnDestroy {
 
   @Output() closed = new EventEmitter<ModalClosedEventArgs>(false);
 
-  @HostBinding('class.modal') addModalClass = true;
-  @HostBinding('class.modal-closing') isClosing = false;
-  @HostBinding('style.display') get hostDisplay() { return this.isOpened ? 'block' : 'none'; }
-  @HostBinding('attr.tabindex') tabIndex = -1;
-  @HostBinding('attr.role') role = 'dialog';
+  @HostBinding('class.modal') get classModal() { return true; }
+  @HostBinding('class.modal-closing') get classModalClosing() { return this.isClosing; }
+  @HostBinding('style.display') get styleDisplay() { return this.isOpening || this.isOpened ? 'block' : 'none'; }
+  @HostBinding('attr.tabindex') attrTabIndex = -1;
+  @HostBinding('attr.role') attrRole = 'dialog';
+  @HostBinding('attr.aria-hidden') get attrAreaHidden() { return !this.isOpened; }
+  @HostBinding('class.fade') get classFade() { return this.isOpening || this.isOpened; }
+  @HostBinding('class.show') get classShow() { return this.isOpened && !this.isClosing; }
 
-  isOpened = false;
+  private isClosing = false;
+  private isOpening = false;
+  private isOpened = false;
 
   constructor(private modalRoot: ElementRef) {
   }
@@ -52,10 +57,12 @@ export class ModalComponent implements Modal, OnInit, OnDestroy {
       return;
     }
 
-    this.isOpened = true;
     this.isClosing = false;
+    this.isOpening = true;
 
     window.setTimeout(() => {
+      this.isOpening = false;
+      this.isOpened = true;
       this.modalRoot.nativeElement.focus();
     }, 0);
 
@@ -96,7 +103,7 @@ export class ModalComponent implements Modal, OnInit, OnDestroy {
 
     this.isClosing = true;
 
-    this.onModalRootAnimationEnd(() => {
+    this.onAnimationEnd(this.modalRoot.nativeElement, () => {
       this.onClosed(reason, result);
     });
   }
@@ -114,17 +121,29 @@ export class ModalComponent implements Modal, OnInit, OnDestroy {
     }
   }
 
-  private onModalRootAnimationEnd(callback: () => any) {
-    let element = this.modalRoot.nativeElement;
-    let eventName = this.getAnimationEndEventName(element);
+  private onAnimationEnd(element: HTMLElement, callback: () => any) {
+    const animationEventName = this.getAnimationEndEventName(element);
+    const transitionEventName = this.getTransitionEndEventName(element);
 
-    if (eventName !== undefined) {
+    if (animationEventName !== undefined || transitionEventName !== undefined) {
+      let done = false;
+
       let runOnce = (e: any) => {
-        callback();
+        if (!done) {
+          callback();
+          done = true;
+        }
+
         element.removeEventListener(e.type, runOnce);
       };
 
-      element.addEventListener(eventName, runOnce, false);
+      if (animationEventName !== undefined) {
+        element.addEventListener(animationEventName, runOnce, false);
+      }
+
+      if (transitionEventName !== undefined) {
+        element.addEventListener(transitionEventName, runOnce, false);
+      }
     }
     else {
       callback();
@@ -143,6 +162,24 @@ export class ModalComponent implements Modal, OnInit, OnDestroy {
     for (let t in animations) {
       if (el.style[t] !== undefined) {
         return animations[t];
+      }
+    }
+
+    return undefined;
+  }
+
+  private getTransitionEndEventName(el: any): string | undefined {
+    let transitions: any = {
+      'transition' : 'transitionend',
+      'OTransition' : 'oTransitionEnd',
+      'MozTransition' : 'transitionend',
+      'WebkitTransition': 'webkitTransitionEnd',
+      'MSTransition': 'MSTransitionEnd'
+    };
+
+    for (let t in transitions) {
+      if (el.style[t] !== undefined) {
+        return transitions[t];
       }
     }
 
