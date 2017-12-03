@@ -300,6 +300,10 @@ $font-weight-semibold:      600;
           flex: 1;
         }
 
+        h1, h2, h3, h4, h5 {
+          margin: 0;
+        }
+
         .close {
           text-align:center;
           @include icon(cross, before);
