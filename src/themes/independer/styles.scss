@@ -216,8 +216,8 @@ $font-weight-semibold:      600;
   @media(max-width:$screen-sm-min) {
     animation: modal-slidein 1s;
 
-    modal-closing & {
-      animation: modal-slideout 1s;
+    .modal-closing & {
+      animation: modal-slideout .5s;
     }
   }
 
@@ -251,10 +251,14 @@ $font-weight-semibold:      600;
 
   .close {
     text-align:center;
-    @include icon(cross, before);
     cursor: pointer;
     color: $border-grey;
-    @include icon(close-button);
+
+    .bootstrap-cross {
+      display: none;
+    }
+
+    @include icon(close-button, after);
 
     @media(min-width:$screen-sm-min) {
       top: -12px;

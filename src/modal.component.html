@@ -12,7 +12,9 @@
     <div class="modal-content">
       <div #header class="modal-header">
         <ng-content select="ind-modal-header"></ng-content>
-        <button *ngIf="showCloseButton" class="close" data-dismiss="modal" [attr.aria-label]="'Close'" (click)="onCloseButtonClick()"></button>
+        <button *ngIf="showCloseButton" class="close" data-dismiss="modal" [attr.aria-label]="'Close'" (click)="onCloseButtonClick()">
+          <span class="bootstrap-cross">&times;</span>
+        </button>
       </div>
       <div #body class="modal-body">
         <ng-content select="ind-modal-content"></ng-content>
