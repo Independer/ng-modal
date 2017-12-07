@@ -1,17 +1,38 @@
 import {
   Component, Input, Output, EventEmitter, ElementRef, OnDestroy, HostListener,
-  forwardRef, OnInit, ViewChild, HostBinding
+  OnInit, ViewChild, HostBinding, Optional, Directive
 } from '@angular/core';
 import { ModalBodyStylingHelper } from './modal-body-styling.helper';
-import { Modal, ModalClosedEventArgs, ModalCloseReason } from './modal';
+import { InternalModalRef } from './modal-ref';
+
+export enum ModalCloseReason {
+  Programmatically,
+  OutsideClick,
+  Escape,
+  CloseButton,
+  BrowserBackNavigation,
+  Destroy
+}
+
+export class ModalClosedEventArgs {
+  constructor(public readonly reason: ModalCloseReason,
+              public readonly result: any) {
+  }
+}
+
+@Directive({
+  // tslint:disable-next-line:directive-selector
+  selector: 'ind-modal-header, ind-modal-content, ind-modal-footer, ind-model-header-after'
+})
+export class ModalTransclusionsDirective {
+}
+
 
 @Component({
   selector: 'ind-modal',
-  templateUrl: './modal.component.html',
-  // tslint:disable-next-line:no-forward-ref
-  providers: [{ provide: Modal, useExisting: forwardRef(() => ModalComponent) }]
+  templateUrl: './modal.component.html'
 })
-export class ModalComponent implements Modal, OnInit, OnDestroy {
+export class ModalComponent implements OnInit, OnDestroy {
   @Input() closeOnEscape = true;
   @Input() closeOnOutsideClick = true;
   @Input() showCloseButton = true;
@@ -38,7 +59,10 @@ export class ModalComponent implements Modal, OnInit, OnDestroy {
   private isOpening = false;
   private isOpened = false;
 
-  constructor() {
+  constructor(@Optional() modalRef?: InternalModalRef) {
+    if (modalRef) {
+      modalRef.registerModal(this);
+    }
   }
 
   @HostListener('window:popstate')

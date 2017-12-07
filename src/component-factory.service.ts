@@ -14,11 +14,13 @@ export class ComponentFactoryService {
 
     let componentRef: ComponentRef<T>;
 
+    injector = injector || this.injector;
+
     if (location && location instanceof ViewContainerRef) {
       componentRef = location.createComponent(componentFactory, undefined, injector);
     }
     else {
-      componentRef = componentFactory.create(this.injector);
+      componentRef = componentFactory.create(injector);
 
       let appRef = this.injector.get(ApplicationRef);
       appRef.attachView(componentRef.hostView);
