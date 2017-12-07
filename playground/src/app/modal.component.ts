@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
-import { ModalComponentBase } from 'ind-modal';
+import { ModalRef } from 'ind-modal';
 
 @Component({
   templateUrl: './modal.component.html'
 })
-export class ModalComponent extends ModalComponentBase {
+export class ModalComponent {
+  constructor(private modal: ModalRef) {
+  }
+
+  close() {
+    this.modal.close();
+  }
 }

@@ -1,22 +1,21 @@
-import { OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { first } from 'rxjs/operator/first';
-import { Modal, ModalClosedEventArgs } from './modal';
+import { ModalClosedEventArgs, ModalComponent } from './modal.component';
 
-export abstract class ModalComponentBase implements Modal, OnInit {
-  @ViewChild(Modal)
-  modal: Modal;
+export abstract class ModalRef<T = any> {
+  abstract closed: Observable<ModalClosedEventArgs>;
+  abstract close(...args: any[]): void;
+}
 
-  ngOnInit() {
-    if (!this.modal) {
-      throw new Error('Child component "ind-modal" cannot be found. Please make sure it is present in the template of this modal component.');
-    }
+export class InternalModalRef<T = any> implements ModalRef<T> {
+  private _modal: ModalComponent;
 
-    this.closed.subscribe(args => this.onClosed(args));
+  registerModal(modal: ModalComponent) {
+    this._modal = modal;
   }
 
-  open(...args: any[]): void {
-    this.modal.open(args);
+  open() {
+    this.modal.open();
   }
 
   close(...args: any[]): void {
@@ -33,7 +32,11 @@ export abstract class ModalComponentBase implements Modal, OnInit {
     return first.call(this.modal.closed);
   }
 
-  protected onClosed(args: ModalClosedEventArgs) {
-    // To be overrided in derived classes
+  private get modal() {
+    if (!this._modal) {
+      throw new Error('An instance of ModalComponent is not registered. Please make sure that your own modal component ' +
+        'that you instantiate via ModalService contains "ind-modal" in its template.')
+    }
+    return this._modal;
   }
 }
