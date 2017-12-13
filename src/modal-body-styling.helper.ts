@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class ModalBodyStylingHelper {
 
   private static activeModalsCount = 0;
-  private static restoreBodyStyling: () => void | undefined;
+  private static restoreBodyStyling: (() => void | undefined) | undefined = undefined;
 
   public static onModalOpened() {
     // Modify the document body only if this is the first modal
