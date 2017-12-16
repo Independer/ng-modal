@@ -35,7 +35,7 @@ export class InternalModalRef implements ModalRef {
   private get modal() {
     if (!this._modal) {
       throw new Error('An instance of ModalComponent is not registered. Please make sure that your own modal component ' +
-        'that you instantiate via ModalService contains "ind-modal" in its template.')
+        'that you instantiate via ModalService contains "modal" in its template.')
     }
     return this._modal;
   }

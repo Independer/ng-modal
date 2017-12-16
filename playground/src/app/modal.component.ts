@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalRef } from 'ind-modal';
+import { ModalRef } from '@independer/ng-modal';
 
 @Component({
   templateUrl: './modal.component.html'

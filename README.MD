@@ -1,4 +1,4 @@
-# ind-modal
+# modal
 
 Lightweight implementation of modal dialogs/panels for Angular.
 
@@ -10,7 +10,7 @@ Lightweight implementation of modal dialogs/panels for Angular.
 To install this library, run:
 
 ```bash
-$ npm install ind-modal --save
+$ npm install modal --save
 ```
 
 ## Usage
@@ -18,7 +18,7 @@ $ npm install ind-modal --save
 Import the `IndModalModule`:
 
 ```ts
-import { IndModalModule } from 'ind-modal';
+import { IndModalModule } from '@independer/ng-modal';
 ...
 
 @NgModule({
@@ -28,7 +28,7 @@ import { IndModalModule } from 'ind-modal';
   imports: [
     ...,
 
-    // Import this module in order to use the "ind-modal" component and ModalService
+    // Import this module in order to use the "modal" component and ModalService
     IndModalModule
   ],
   providers: [
@@ -49,17 +49,17 @@ export class AppModule { }
 Define your modal dialog inside a template of another component. For example, in your `home.component.html` you could have:
 
 ```html
-<ind-modal #firstModal>
-  <ind-modal-header>
+<modal #firstModal>
+  <modal-header>
     I am first modal
-  </ind-modal-header>
-  <ind-modal-content>
+  </modal-header>
+  <modal-content>
     This modal has its own header, content and footer.
-  </ind-modal-content>
-  <ind-modal-footer>
+  </modal-content>
+  <modal-footer>
     <button (click)="firstModal.close()">okay!</button>
-  </ind-modal-footer>
-</ind-modal>
+  </modal-footer>
+</modal>
 ```
 Then open the dialog as follows:
 
@@ -72,23 +72,23 @@ Define your modal dialog as separate component.
 
 **modal.component.html**
 ```html
-<ind-modal #modal>
-  <ind-modal-header>
+<modal #modal>
+  <modal-header>
     I am a modal component
-  </ind-modal-header>
-  <ind-modal-content>
+  </modal-header>
+  <modal-content>
     I am opened programmatically from code.
-  </ind-modal-content>
-  <ind-modal-footer>
+  </modal-content>
+  <modal-footer>
     <button (click)="modal.close()">okay!</button>
-  </ind-modal-footer>
-</ind-modal>
+  </modal-footer>
+</modal>
 ```
 
 **modal.component.ts**
 ```ts
 import { Component } from '@angular/core';
-import { ModalComponentBase } from 'ind-modal';
+import { ModalComponentBase } from '@independer/ng-modal';
 
 @Component({
   templateUrl: './modal.component.html'
@@ -120,7 +120,7 @@ Inject the `ModalService` where you want to open your modal component from. For 
 **home.component.ts**
 ```ts
 import { Component } from '@angular/core';
-import { ModalService } from 'ind-modal';
+import { ModalService } from '@independer/ng-modal';
 import { ModalComponent } from './modal.component';
 
 @Component({
@@ -143,14 +143,14 @@ Define your modal dialog/panel as a separate component, like in *Option 2*, and 
 
 **modal-route.component.html**
 ```html
-<ind-modal type="side-panel" [routeBehavior]="true">
-  <ind-modal-header>
+<modal type="side-panel" [routeBehavior]="true">
+  <modal-header>
     I am a side panel within a route
-  </ind-modal-header>
-  <ind-modal-content>
+  </modal-header>
+  <modal-content>
     This the content of the side panel.
-  </ind-modal-content>
-</ind-modal>
+  </modal-content>
+</modal>
 
 ```
 Note here `[routeBehavior]="true"`. 
@@ -241,11 +241,11 @@ The library comes with a predefined set of styles, but you're free to style the 
 ```json
 "styles": [
   ...,
-  "../node_modules/ind-modal/styles.css"
+  "../node_modules/modal/styles.css"
 ],
 ```
 
-If you would like to customize the styles, you can copy the SASS source code from `node_modules/ind-modal/styles.scss` to your application and change it the way you need.
+If you would like to customize the styles, you can copy the SASS source code from `node_modules/modal/styles.scss` to your application and change it the way you need.
 
 ## Development of the Library
 
@@ -268,7 +268,7 @@ To test the library with the `playground` application link the `dist` folder usi
 npm link
 
 # in "playground" folder. This step is also done automatically after "yarn install"
-npm link ind-modal
+npm link modal
 ```
 
 ## License

@@ -22,14 +22,16 @@ export class ModalClosedEventArgs {
 
 @Directive({
   // tslint:disable-next-line:directive-selector
-  selector: 'ind-modal-header, ind-modal-content, ind-modal-footer, ind-model-header-after'
+  selector: 'modal-header, modal-content, modal-footer, model-header-after'
 })
 export class ModalTransclusionsDirective {
 }
 
 
+
 @Component({
-  selector: 'ind-modal',
+  // tslint:disable-next-line:component-selector
+  selector: 'modal',
   templateUrl: './modal.component.html'
 })
 export class ModalComponent implements OnInit, OnDestroy {

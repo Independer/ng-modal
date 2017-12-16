@@ -42,7 +42,7 @@ export class ModalBodyStylingHelper {
     if (scrollBarWidth > 0) {
       originalBodyPadding = parseInt((document.body.style.paddingRight || '0'), 10);
       document.body.style.paddingRight = (originalBodyPadding + scrollBarWidth) + 'px';
-      document.body.classList.add('ind-modal-padded');
+      document.body.classList.add('modal-padded');
     }
 
     window.setTimeout(() => {
@@ -53,7 +53,7 @@ export class ModalBodyStylingHelper {
     return () => {
       // do not try to remove all the classes in one line, as IE is not able to interpret it. Each class should be removed separately.
       document.body.classList.remove('modal-open');
-      document.body.classList.remove('ind-modal-padded');
+      document.body.classList.remove('modal-padded');
 
       document.body.style.top = '';
 

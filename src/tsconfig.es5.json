@@ -21,8 +21,8 @@
     "annotateForClosureCompiler": true,
     "strictMetadataEmit": true,
     "skipTemplateCodegen": true,
-    "flatModuleOutFile": "ind-modal.js",
-    "flatModuleId": "ind-modal"
+    "flatModuleOutFile": "modal.js",
+    "flatModuleId": "modal"
   },
   "files": [
     "./index.ts"
