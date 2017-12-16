@@ -14,11 +14,10 @@ export class ComponentFactoryService {
 
   /**
    * Instantiates a component and adds it to the DOM.
-   * @constructor
-   * @param {Type<T>} componentType - Type of the component to create, e.g. "DynamicComponent".
-   * @param {HTMLElement | ViewContainerRef} location - (Optional) Location where to inject the
+   * @param componentType - Type of the component to create, e.g. "DynamicComponent".
+   * @param location - (Optional) Location where to inject the
    * component in the DOM, can be an arbitrary HTML element or a ViewContainerRef.
-   * @param {Injector} injector - (Optional) Injector that should be used as a parent injector
+   * @param injector - (Optional) Injector that should be used as a parent injector
    * for the component. This is useful only if you want to inject into the component services
    * that are provided in a different place from where ComponentFactoryService is provided.
    */
