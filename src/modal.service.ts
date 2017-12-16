@@ -1,4 +1,4 @@
-import { Injectable, Injector, ReflectiveInjector, Type } from '@angular/core';
+import { Injectable, Injector, Type } from '@angular/core';
 import { ComponentFactoryService } from './component-factory.service';
 import { ModalRef, InternalModalRef } from './modal-ref';
 
@@ -10,7 +10,7 @@ export class ModalService {
   open<T>(componentType: Type<T>): T {
     const modalRef = new InternalModalRef<T>();
 
-    let injector = ReflectiveInjector.resolveAndCreate([
+    let injector = Injector.create([
       { provide: InternalModalRef, useValue: modalRef },
       { provide: ModalRef, useValue: modalRef }
     ], this.injector);
