@@ -1,5 +1,5 @@
 <div>
-  <h1>ind-modal demo</h1>
+  <h1>ng-modal demo</h1>
 
   <ul>
     <li><button (click)="firstModal.open()">1. Simple Dialog</button></li>
@@ -8,17 +8,17 @@
     <li><button (click)="openModal()">4. Programmatic Dialog</button></li>
   </ul>
 
-  <ind-modal #firstModal>
-    <ind-modal-header>
+  <modal #firstModal>
+    <modal-header>
       <h4>I am a Simple Dialog</h4>
-    </ind-modal-header>
-    <ind-modal-content>
+    </modal-header>
+    <modal-content>
       This dialog is defined inside a template of another component.
-    </ind-modal-content>
-    <ind-modal-footer>
+    </modal-content>
+    <modal-footer>
       <button (click)="firstModal.close()">okay!</button>
-    </ind-modal-footer>
-  </ind-modal>
+    </modal-footer>
+  </modal>
 </div>
 
 <router-outlet></router-outlet>

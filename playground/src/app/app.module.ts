@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import { ModalRouteComponent } from './modal-route.component';
 import { ModalComponent } from './modal.component';
-import { IndModalModule } from 'ind-modal';
+import { ModalModule } from '@independer/ng-modal';
 import { HomeComponent } from './home.component';
 
 @NgModule({
@@ -20,7 +20,7 @@ import { HomeComponent } from './home.component';
     BrowserModule,
     CommonModule,
     AppRoutingModule,
-    IndModalModule
+    ModalModule
   ],
   providers: [],
   bootstrap: [AppComponent],

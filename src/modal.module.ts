@@ -21,5 +21,5 @@ import { ComponentFactoryService } from './component-factory.service';
     ModalTransclusionsDirective
   ]
 })
-export class IndModalModule {
+export class ModalModule {
 }
