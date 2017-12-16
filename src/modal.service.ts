@@ -8,7 +8,7 @@ export class ModalService {
   }
 
   open<T>(componentType: Type<T>): T {
-    const modalRef = new InternalModalRef<T>();
+    const modalRef = new InternalModalRef();
 
     let injector = Injector.create([
       { provide: InternalModalRef, useValue: modalRef },

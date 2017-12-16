@@ -2,12 +2,12 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/first';
 import { ModalClosedEventArgs, ModalComponent } from './modal.component';
 
-export abstract class ModalRef<T = any> {
+export abstract class ModalRef {
   abstract closed: Observable<ModalClosedEventArgs>;
   abstract close(...args: any[]): void;
 }
 
-export class InternalModalRef<T = any> implements ModalRef<T> {
+export class InternalModalRef implements ModalRef {
   private _modal: ModalComponent;
 
   registerModal(modal: ModalComponent) {
