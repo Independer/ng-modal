@@ -2,7 +2,7 @@
 
 Lightweight implementation of modal dialogs for Angular.
 
-Includes a [Bootstrap](https://getbootstrap.com/docs/4.0/components/modal/) theme. Also works with standard Bootstrap styles (e.g. from [CDN](<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">)). See the [Styles](#styles) section below for more information on styling.  
+Includes a [Bootstrap](https://getbootstrap.com/docs/4.0/components/modal/) theme. Also works with standard Bootstrap styles (e.g. from [CDN](https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css)). See the [Styles](#styles) section below for more information on styling.  
 
 ## Installation
 
