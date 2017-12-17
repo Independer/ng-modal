@@ -217,12 +217,12 @@ In order to include the styles in your Angular CLI application, add the followin
 ```json
 "styles": [
   ...,
-  "../node_modules/@independer/modal/<theme>/styles.css"
+  "../node_modules/@independer/modal/themes/<theme>/styles.css"
 ],
 ```
 *Replace `<theme>` with either `bootstrap` or `independer`*.
 
-If you would like to customize the styles, you can copy the SASS source code from `node_modules/@independer/modal/<theme>/styles.scss` to your application and change it the way you need.
+If you would like to customize the styles, you can copy the SASS source code from `node_modules/@independer/modal/themes/<theme>/styles.scss` to your application and change it the way you need.
 
 ### Works with standard Bootstrap styles
 In case your already use [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) in your app or you would like to use the "official" Bootstrap styles, you don't need
