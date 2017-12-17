@@ -217,7 +217,7 @@ In order to include the styles in your Angular CLI application, add the followin
 ```json
 "styles": [
   ...,
-  "../node_modules/@indpender/modal/<theme>/styles.css"
+  "../node_modules/@independer/modal/<theme>/styles.css"
 ],
 ```
 *Replace `<theme>` with either `bootstrap` or `independer`*.
