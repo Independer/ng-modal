@@ -1,8 +1,8 @@
 # ng-modal
 
-Lightweight implementation of modal dialogs/panels for Angular.
+Lightweight implementation of modal dialogs for Angular.
 
-Includes a [Bootstrap](https://getbootstrap.com/docs/4.0/components/modal/) theme as well as works with standard Bootstrap styles (e.g. from [CDN](<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">)). See the [Styles](#styles) section below for more information on styling.  
+Includes a [Bootstrap](https://getbootstrap.com/docs/4.0/components/modal/) theme. Also works with standard Bootstrap styles (e.g. from [CDN](<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">)). See the [Styles](#styles) section below for more information on styling.  
 
 ## Installation
 
@@ -143,7 +143,7 @@ export class HomeComponent {
 ```
 
 ### Option 3 - Router
-Define your modal dialog/panel as a component, like in *Option 2*, and open it by navigating to a route.
+Define your modal dialog as a component (like in **Option 2**) and open it by navigating to a route.
 
 **modal-route.component.html**
 ```html
@@ -220,16 +220,16 @@ In order to include the styles in your Angular CLI application, add the followin
   "../node_modules/modal/<theme>/styles.css"
 ],
 ```
-*Replace <theme> with either `bootstrap` or `independer`*.
+*Replace `<theme>` with either `bootstrap` or `independer`*.
 
 If you would like to customize the styles, you can copy the SASS source code from `node_modules/modal/<theme>/styles.scss` to your application and change it the way you need.
 
 ### Works with standard Bootstrap styles
-In case your app already includes [Bootstrap styles](https://getbootstrap.com/docs/4.0/getting-started/introduction/) or you would like to use "official" Bootstrap styles, you don't need
+In case your already use [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) in your app or you would like to use the "official" Bootstrap styles, you don't need
 to include any themes in `.angular-cli.json`. The library uses the same CSS classes and HTML structure as
 modals in Bootstrap, so it works with the standard Bootstrap styles.
 
-### Playground App
+### Examples
 
 See the above examples in action by running the Angular app in the **playground** folder. 
 
@@ -281,7 +281,7 @@ To test the library with the `playground` application link the `dist` folder usi
 npm link
 
 # in "playground" folder. This step is also done automatically after "yarn install"
-npm link modal
+npm link @independer/ng-modal
 ```
 
 ## License
