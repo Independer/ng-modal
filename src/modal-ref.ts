@@ -2,16 +2,30 @@ import { Observable } from 'rxjs/Observable';
 import { first } from 'rxjs/operator/first';
 import { ModalClosedEventArgs, ModalComponent } from './modal.component';
 
-export abstract class ModalRef {
+export abstract class ModalRef<T = any> {
   abstract closed: Observable<ModalClosedEventArgs>;
   abstract close(...args: any[]): void;
+  abstract get componentInstance(): T;
 }
 
-export class InternalModalRef implements ModalRef {
-  private _modal: ModalComponent;
+export class InternalModalRef<T = any> implements ModalRef<T> {
+  private _modal: ModalComponent | undefined;
+  private _componentInstance: T | undefined;
 
   registerModal(modal: ModalComponent) {
     this._modal = modal;
+  }
+
+  registerComponentInstance(instance: T) {
+    this._componentInstance = instance;
+  }
+
+  get componentInstance(): T {
+    if (!this._componentInstance) {
+      throw new Error('Component instance has not been registered yet.');
+    }
+
+    return this._componentInstance;
   }
 
   open() {

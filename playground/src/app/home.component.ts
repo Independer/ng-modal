@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalService } from '@independer/ng-modal';
 import { ModalComponent } from './modal.component';
+import { ModalCloseReason } from '../../../src/modal.component';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,12 @@ export class HomeComponent {
   }
 
   openModal() {
-    this.modalService.open(ModalComponent);
+    const modalRef = this.modalService.open(ModalComponent);
+
+    modalRef.componentInstance.data = 'Modal initialization data set from HomeComponent';
+
+    modalRef.closed.subscribe(args => {
+      console.log(`Modal closed. Reason: ${ModalCloseReason[args.reason]}. Result: ${args.result}`);
+    });
   }
 }
