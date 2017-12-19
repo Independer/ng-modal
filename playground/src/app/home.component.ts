@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { ModalService } from '@independer/ng-modal';
+import { ModalService, ModalCloseReason } from '@independer/ng-modal';
 import { ModalComponent } from './modal.component';
-import { ModalCloseReason } from '../../../src/modal.component';
 
 @Component({
   selector: 'app-home',
