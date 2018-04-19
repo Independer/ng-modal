@@ -11,6 +11,7 @@ export class ModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('InjectedData: ', this.modal.injectedData)
     console.log(`Data: ${this.data}`);
   }
 

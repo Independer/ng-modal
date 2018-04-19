@@ -16,7 +16,7 @@ export enum ModalCloseReason {
 
 export class ModalClosedEventArgs {
   constructor(public readonly reason: ModalCloseReason,
-              public readonly result: any) {
+    public readonly result: any) {
   }
 }
 
@@ -35,6 +35,7 @@ export class ModalTransclusionsDirective {
   templateUrl: './modal.component.html'
 })
 export class ModalComponent implements OnInit, OnDestroy {
+
   @Input() closeOnEscape = true;
   @Input() closeOnOutsideClick = true;
   @Input() showCloseButton = true;
@@ -84,7 +85,7 @@ export class ModalComponent implements OnInit, OnDestroy {
     }
   }
 
-  open(...args: any[]) {
+  open() {
     if (this.isOpened) {
       return;
     }
@@ -217,9 +218,9 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   private getTransitionEndEventName(el: any): string | undefined {
     let transitions: any = {
-      'transition' : 'transitionend',
-      'OTransition' : 'oTransitionEnd',
-      'MozTransition' : 'transitionend',
+      'transition': 'transitionend',
+      'OTransition': 'oTransitionEnd',
+      'MozTransition': 'transitionend',
       'WebkitTransition': 'webkitTransitionEnd',
       'MSTransition': 'MSTransitionEnd'
     };
