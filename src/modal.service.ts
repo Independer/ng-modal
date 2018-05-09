@@ -7,7 +7,7 @@ export class ModalService {
   constructor(private componentFactory: ComponentFactoryService, private injector: Injector) {
   }
 
-  open<T>(componentType: Type<T>, injectedData?: any): ModalRef<T> {
+  open<T>(componentType: Type<T>, initialise?: (instance: T) => void): ModalRef<T> {
     const modalRef = new InternalModalRef<T>();
 
     let injector = Injector.create([
@@ -18,7 +18,6 @@ export class ModalService {
     let componentRef = this.componentFactory.createComponent(componentType, undefined, injector);
 
     modalRef.registerComponentInstance(componentRef.instance);
-    modalRef.injectedData = injectedData;
     modalRef.open();
 
     modalRef.closed.subscribe(() => {

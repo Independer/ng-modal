@@ -11,7 +11,11 @@ export class HomeComponent {
   }
 
   openModal() {
-    const modalRef = this.modalService.open(ModalComponent, { passedArr: ['1', '2', '3'], innerObj: { test: 'tested' } });
+    const modalRef = this.modalService.open(ModalComponent, modal => {
+      modal.data = 'Modal initialization data set from HomeComponent';
+      modal.otherProperty = 123;
+      // etc.
+    });
 
     modalRef.componentInstance.data = 'Modal initialization data set from HomeComponent';
 
