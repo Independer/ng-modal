@@ -12,8 +12,8 @@ export class ModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('InjectedData: ', this.otherProperty)
     console.log(`Data: ${this.data}`);
+    console.log(`Data passed through modal reference: ${this.otherProperty}`);
   }
 
   close() {

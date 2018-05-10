@@ -18,6 +18,11 @@ export class ModalService {
     let componentRef = this.componentFactory.createComponent(componentType, undefined, injector);
 
     modalRef.registerComponentInstance(componentRef.instance);
+
+    if (initialise) {
+      initialise(modalRef.componentInstance);
+    }
+    
     modalRef.open();
 
     modalRef.closed.subscribe(() => {

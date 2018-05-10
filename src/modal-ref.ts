@@ -4,7 +4,6 @@ import { ModalClosedEventArgs, ModalComponent } from './modal.component';
 
 export abstract class ModalRef<T = any> {
   abstract closed: Observable<ModalClosedEventArgs>;
-  abstract injectedData: any | undefined;
   abstract close(...args: any[]): void;
   abstract get componentInstance(): T;
 }
@@ -12,7 +11,6 @@ export abstract class ModalRef<T = any> {
 export class InternalModalRef<T = any> implements ModalRef<T> {
   private _modal: ModalComponent | undefined;
   private _componentInstance: T | undefined;
-  public injectedData: any | undefined;
 
   registerModal(modal: ModalComponent) {
     this._modal = modal;
