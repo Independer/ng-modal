@@ -6,12 +6,14 @@ import { ModalRef } from '@independer/ng-modal';
 })
 export class ModalComponent implements OnInit {
   data: any;
+  otherProperty: any;
 
   constructor(private modal: ModalRef) {
   }
 
   ngOnInit(): void {
     console.log(`Data: ${this.data}`);
+    console.log(`Data passed through modal reference: ${this.otherProperty}`);
   }
 
   close() {
