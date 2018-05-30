@@ -85,7 +85,7 @@ export class ModalComponent implements OnInit, OnDestroy {
     }
   }
 
-  open() {
+  open(autoCloseTimeout?: number) {
     if (this.isOpened) {
       return;
     }
@@ -100,6 +100,10 @@ export class ModalComponent implements OnInit, OnDestroy {
     }, 0);
 
     ModalBodyStylingHelper.onModalOpened();
+
+    if (autoCloseTimeout) {
+      setTimeout(() => this.doClose(ModalCloseReason.Programmatically), autoCloseTimeout);
+    }
   }
 
   close(result: any) {
