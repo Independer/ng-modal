@@ -28,8 +28,8 @@ export class InternalModalRef<T = any> implements ModalRef<T> {
     return this._componentInstance;
   }
 
-  open() {
-    this.modal.open();
+  open(autoCloseTimeout?: number) {
+    this.modal.open(autoCloseTimeout);
   }
 
   close(...args: any[]): void {
