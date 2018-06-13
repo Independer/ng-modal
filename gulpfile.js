@@ -154,7 +154,7 @@ gulp.task('rollup:umd', function () {
       }
 
     }))
-    .pipe(rename('modal.umd.js'))
+    .pipe(rename('index.umd.js'))
     .pipe(gulp.dest(distFolder));
 });
 
