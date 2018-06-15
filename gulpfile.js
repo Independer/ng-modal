@@ -89,18 +89,22 @@ gulp.task('rollup:fesm', function () {
       external: [
         '@angular/core',
         '@angular/common',
-        'rxjs/operator/first'
+        'rxjs',
+        'rxjs/operators'
       ],
 
-      globals: {
-        '@angular/core': 'core',
-        '@angular/common': 'common',
-        'rxjs/operator/first': 'first'
-      },
-
-      // Format of generated bundle
-      // See "format" in https://rollupjs.org/#core-functionality
-      format: 'es'
+      output: {
+        globals: {
+          '@angular/core': 'core',
+          '@angular/common': 'common',
+          'rxjs': 'rxjs',
+          'rxjs/operators': 'operators'
+        },
+  
+        // Format of generated bundle
+        // See "format" in https://rollupjs.org/#core-functionality
+        format: 'es'
+      }
     }))
     .pipe(gulp.dest(distFolder));
 });
@@ -129,30 +133,33 @@ gulp.task('rollup:umd', function () {
       external: [
         '@angular/core',
         '@angular/common',
-        'rxjs/operator/first'
+        'rxjs',
+        'rxjs/operators'
       ],
 
-      // Format of generated bundle
-      // See "format" in https://rollupjs.org/#core-functionality
-      format: 'umd',
+      output: {
+        // Export mode to use
+        // See "exports" in https://rollupjs.org/#danger-zone
+        exports: 'named',
 
-      // Export mode to use
-      // See "exports" in https://rollupjs.org/#danger-zone
-      exports: 'named',
+        // The name to use for the module for UMD/IIFE bundles
+        // (required for bundles with exports)
+        // See "name" in https://rollupjs.org/#core-functionality
+        name: 'modal',
+        
+        // See "globals" in https://rollupjs.org/#core-functionality
+        globals: {
+          typescript: 'ts',
+          '@angular/core': 'core',
+          '@angular/common': 'common',
+          'rxjs': 'rxjs',
+          'rxjs/operators': 'operators'
+        },
 
-      // The name to use for the module for UMD/IIFE bundles
-      // (required for bundles with exports)
-      // See "name" in https://rollupjs.org/#core-functionality
-      name: 'modal',
-
-      // See "globals" in https://rollupjs.org/#core-functionality
-      globals: {
-        typescript: 'ts',
-        '@angular/core': 'core',
-        '@angular/common': 'common',
-        'rxjs/operator/first': 'first'
+        // Format of generated bundle
+        // See "format" in https://rollupjs.org/#core-functionality
+        format: 'umd',
       }
-
     }))
     .pipe(rename('index.umd.js'))
     .pipe(gulp.dest(distFolder));
