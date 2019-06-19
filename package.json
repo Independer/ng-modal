@@ -4,8 +4,9 @@
   "scripts": {
     "ng": "ng",
     "gulp": "gulp",
-    "build:lib": "ng build ng-modal && gulp build",
+    "build:lib": "ng build ng-modal && gulp build && npm run build:schematics && gulp copy:schematics:assets",
     "postbuild:lib": "npm link ./dist/ng-modal",
+    "build:schematics": "./node_modules/.bin/tsc -p ./projects/ng-modal/tsconfig.schematics.json",
     "build:playground": "ng build playground",
     "prebuild:playground": "npm link @independer/ng-modal",
     "serve:playground": "ng serve playground",

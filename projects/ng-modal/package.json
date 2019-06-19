@@ -19,5 +19,6 @@
   "peerDependencies": {
     "@angular/common": ">=8.0.0",
     "@angular/core": ">=8.0.0"
-  }
+  },
+  "schematics": "./schematics/collection.json"
 }

@@ -11,6 +11,10 @@ To install this library, run:
 ```bash
 $ npm install @independer/ng-modal --save
 ```
+OR with Angular CLI:
+```bash
+$ ng add @independer/ng-modal
+```
 
 ## Usage
 
