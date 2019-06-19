@@ -2,7 +2,7 @@
 
 Lightweight implementation of modal dialogs for Angular.
 
-Includes a [Bootstrap](https://getbootstrap.com/docs/4.0/components/modal/) theme. Also works with standard Bootstrap styles (e.g. from [CDN](https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css)). See the [Styles](#styles) section below for more information on styling.  
+Includes a [Bootstrap](https://getbootstrap.com/docs/4.0/components/modal/) theme. Also works with standard Bootstrap styles (e.g. from [CDN](https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css)). See the [Styles](#styles) section below for more information on styling.
 
 ## Installation
 
@@ -129,10 +129,10 @@ import { ModalComponent } from './modal.component';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html'  
+  templateUrl: './home.component.html'
 })
 export class HomeComponent {
-  constructor(private modalService: ModalService) {    
+  constructor(private modalService: ModalService) {
   }
 
   openModal() {
@@ -157,14 +157,14 @@ Define your modal dialog as a component (like in **Option 2**) and open it by na
 </modal>
 ```
 Note here `[routeBehavior]="true"` - this tells the `modal` component to open itself as soon as the router adds it to the DOM, and
-after user closes it, navigate back to the previous URL. 
+after user closes it, navigate back to the previous URL.
 
 **modal-route.component.ts**
 ```ts
 import { Component } from '@angular/core';
 
 @Component({
-  templateUrl: './modal-route.component.html'  
+  templateUrl: './modal-route.component.html'
 })
 export class ModalRouteComponent {
 }
@@ -181,7 +181,7 @@ import { ModalRouteComponent } from './modal-route.component';
 import { HomeComponent } from './home.component';
 
 const routes: Routes = [
-  { 
+  {
     path: '', component: HomeComponent, children: [
       { path: 'modal-component', component: ModalRouteComponent }
     ]
@@ -208,7 +208,7 @@ Open the modal by navigating to `/modal-component`:
 ## Styles
 
 The library comes with two predefined themes:
- 
+
 - `independer` - our own theme that we use at `independer.nl`
 - `bootstrap` - https://getbootstrap.com/docs/4.0/components/modal/ (note that you don't need to include this theme if your app already includes Bootstrap styles, see below).
 
@@ -231,57 +231,45 @@ modals in Bootstrap, so it works with the standard Bootstrap styles.
 
 ### Examples
 
-See the above examples in action by running the Angular app in the **playground** folder. 
+See the above examples in action by running the Playground Angular app.
 
-In order to run the example application you need to first build the library and link it to **node_modules** in the **playground** folder. Please follow the following steps:
+To do that, clone this repository and run the following 3 commands:
 
 ```bash
 # 1. Install dependencies
 yarn install
 
-# 2. Build the library
-npm run build
+# 2. Build the library (it also links the build output to `node_modules`)
+yarn build:lib
 
-# 3. Go to /dist folder
-cd dist
-
-# 4.  Create an NPM link
-npm link
-
-# 4. Go to the "playground" folder
-cd ../playground
-
-# 5. Install dependencies
-yarn install
-
-# 6. Run the example application
-yarn start
+# 3. Run the example application
+yarn serve:playground
 ```
 
 Now you can navigate to `http://localhost:4200` to use the **playground** app.
 
 ## Development of the Library
 
-To generate all all the package assets in the `dist` folder run:
+To generate all the package assets in the `dist` folder run:
 
 ```bash
-$ npm run build
+$ yarn build:lib
 ```
 
 To lint all `*.ts` files:
 
 ```bash
-$ npm run lint
+$ yarn lint
 ```
 
-To test the library with the `playground` application link the `dist` folder using `npm link`:
+To test the library with the `playground` application:
 
 ```bash
-# In "dist" folder
-npm link
+# 1. Build the library (it also links the build output to `node_modules`)
+yarn build:lib
 
-# in "playground" folder. This step is also done automatically after "yarn install"
-npm link @independer/ng-modal
+# 2. Run the example application
+yarn serve:playground
 ```
 
 ## License

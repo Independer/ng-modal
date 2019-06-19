@@ -9,7 +9,9 @@ export abstract class ModalRef<T = any> {
 }
 
 export class InternalModalRef<T = any> implements ModalRef<T> {
+// tslint:disable-next-line: variable-name
   private _modal: ModalComponent | undefined;
+// tslint:disable-next-line: variable-name
   private _componentInstance: T | undefined;
 
   registerModal(modal: ModalComponent) {
@@ -49,7 +51,7 @@ export class InternalModalRef<T = any> implements ModalRef<T> {
   private get modal() {
     if (!this._modal) {
       throw new Error('An instance of ModalComponent is not registered. Please make sure that your own modal component ' +
-        'that you instantiate via ModalService contains "modal" in its template.')
+        'that you instantiate via ModalService contains "modal" in its template.');
     }
     return this._modal;
   }

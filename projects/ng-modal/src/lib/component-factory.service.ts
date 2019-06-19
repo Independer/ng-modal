@@ -30,7 +30,7 @@ export class ComponentFactoryService {
     // Important: the component needs to be added to the "entryComponents" as part of the
     // "@NgModule" declaration on the same
     // module where this service is added to the "providers".
-    let componentFactory = this.cfr.resolveComponentFactory(componentType);
+    const componentFactory = this.cfr.resolveComponentFactory(componentType);
 
     let componentRef: ComponentRef<T>;
 
@@ -47,8 +47,7 @@ export class ComponentFactoryService {
         componentFactory,
         undefined /* index */,
         injector || this.defaultInjector);
-    }
-    else {
+    } else {
       // Here the location is any HTML element (could be outside of Angular app), so we need a bit
       // more work to "attach" it to our Angular app.
 
@@ -69,7 +68,7 @@ export class ComponentFactoryService {
 
   private addComponentToDom<T>(parent: HTMLElement, componentRef: ComponentRef<T>): HTMLElement {
     // Grabe the actual HTML element of the component
-    let componentElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+    const componentElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
 
     parent.appendChild(componentElement);
 

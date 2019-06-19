@@ -16,7 +16,7 @@ export enum ModalCloseReason {
 
 export class ModalClosedEventArgs {
   constructor(public readonly reason: ModalCloseReason,
-    public readonly result: any) {
+              public readonly result: any) {
   }
 }
 
@@ -43,8 +43,8 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   @Output() closed = new EventEmitter<ModalClosedEventArgs>(false);
 
-  @ViewChild('modalRoot') modalRoot: ElementRef;
-  @ViewChild('backdrop') backdrop: ElementRef;
+  @ViewChild('modalRoot', { static: true }) modalRoot: ElementRef;
+  @ViewChild('backdrop', { static: true }) backdrop: ElementRef;
 
   get classModalClosing() { return this.isClosing; }
 
@@ -175,7 +175,7 @@ export class ModalComponent implements OnInit, OnDestroy {
     if (animationEventName !== undefined || transitionEventName !== undefined) {
       let done = false;
 
-      let runOnce = () => {
+      const runOnce = () => {
         if (!done) {
           callback();
           done = true;
@@ -192,22 +192,21 @@ export class ModalComponent implements OnInit, OnDestroy {
       if (transitionEventName !== undefined) {
         element.addEventListener(transitionEventName, runOnce, false);
       }
-    }
-    else {
+    } else {
       callback();
     }
   }
 
   private getAnimationEndEventName(el: any): string | undefined {
-    let animations: any = {
-      'animation': 'animationend',
-      'OAnimation': 'oAnimationEnd',
-      'MozAnimation': 'animationend',
-      'WebkitAnimation': 'webkitAnimationEnd',
-      'MSAnimation': 'MSAnimationEnd'
+    const animations: any = {
+      animation: 'animationend',
+      OAnimation: 'oAnimationEnd',
+      MozAnimation: 'animationend',
+      WebkitAnimation: 'webkitAnimationEnd',
+      MSAnimation: 'MSAnimationEnd'
     };
 
-    for (let t in animations) {
+    for (const t in animations) {
       if (el.style[t] !== undefined) {
         return animations[t];
       }
@@ -217,15 +216,15 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   private getTransitionEndEventName(el: any): string | undefined {
-    let transitions: any = {
-      'transition': 'transitionend',
-      'OTransition': 'oTransitionEnd',
-      'MozTransition': 'transitionend',
-      'WebkitTransition': 'webkitTransitionEnd',
-      'MSTransition': 'MSTransitionEnd'
+    const transitions: any = {
+      transition: 'transitionend',
+      OTransition: 'oTransitionEnd',
+      MozTransition: 'transitionend',
+      WebkitTransition: 'webkitTransitionEnd',
+      MSTransition: 'MSTransitionEnd'
     };
 
-    for (let t in transitions) {
+    for (const t in transitions) {
       if (el.style[t] !== undefined) {
         return transitions[t];
       }

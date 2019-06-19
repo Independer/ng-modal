@@ -33,12 +33,12 @@ export class ModalBodyStylingHelper {
     let originalBodyPadding: number | undefined;
     let originalBodyScrollPosition: number;
 
-    let widthDiffs = window.innerWidth - document.body.clientWidth;
+    const widthDiffs = window.innerWidth - document.body.clientWidth;
     originalBodyScrollPosition = document.body.scrollTop;
 
     document.body.classList.add('modal-open');
 
-    let scrollBarWidth = widthDiffs - (window.innerWidth - document.body.clientWidth);
+    const scrollBarWidth = widthDiffs - (window.innerWidth - document.body.clientWidth);
     if (scrollBarWidth > 0) {
       originalBodyPadding = parseInt((document.body.style.paddingRight || '0'), 10);
       document.body.style.paddingRight = (originalBodyPadding + scrollBarWidth) + 'px';
@@ -63,8 +63,7 @@ export class ModalBodyStylingHelper {
 
       if (originalBodyPadding) {
         document.body.style.paddingRight = originalBodyPadding + 'px';
-      }
-      else {
+      } else {
         document.body.style.paddingRight = '';
       }
     };

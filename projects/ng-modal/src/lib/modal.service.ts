@@ -10,19 +10,22 @@ export class ModalService {
   open<T>(componentType: Type<T>, initialise?: (instance: T) => void): ModalRef<T> {
     const modalRef = new InternalModalRef<T>();
 
-    let injector = Injector.create([
-      { provide: InternalModalRef, useValue: modalRef },
-      { provide: ModalRef, useValue: modalRef }
-    ], this.injector);
+    const injector = Injector.create({
+      providers: [
+        { provide: InternalModalRef, useValue: modalRef },
+        { provide: ModalRef, useValue: modalRef }
+      ],
+      parent: this.injector
+    });
 
-    let componentRef = this.componentFactory.createComponent(componentType, undefined, injector);
+    const componentRef = this.componentFactory.createComponent(componentType, undefined, injector);
 
     modalRef.registerComponentInstance(componentRef.instance);
 
     if (initialise) {
       initialise(modalRef.componentInstance);
     }
-    
+
     modalRef.open();
 
     modalRef.closed.subscribe(() => {
