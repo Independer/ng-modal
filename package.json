@@ -30,7 +30,7 @@
     "@angular/common": "^6.0.5",
     "@angular/compiler": "^6.0.5",
     "@angular/compiler-cli": "^6.0.5",
-    "@angular/core": "^6.0.5",
+    "@angular/core": "^11.0.5",
     "@angular/platform-browser": "^6.0.5",
     "@angular/platform-browser-dynamic": "^6.0.5",
     "@compodoc/compodoc": "^1.1.3",
